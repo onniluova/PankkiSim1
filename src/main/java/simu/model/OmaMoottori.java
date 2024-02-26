@@ -37,16 +37,14 @@ public class OmaMoottori extends Moottori{
 
 	@Override
 	protected void suoritaTapahtuma(Tapahtuma t){  // B-vaiheen tapahtumat
-
 		switch ((TapahtumanTyyppi)t.getTyyppi()){
-
 			case ARR1: palvelupisteet[0].lisaaJonoon(new Asiakas());
 				       saapumisprosessi.generoiSeuraava();
 					   kontrolleri.visualisoiAsiakas(); // UUSI
 				break;
 			case DEP1: a = (Asiakas)palvelupisteet[0].otaJonosta();
 				   	   palvelupisteet[1].lisaaJonoon(a);
-						  a.arvoTapahtuma();
+						  a.getTapahtuma();
 				break;
 			case DEP2: a = (Asiakas)palvelupisteet[1].otaJonosta();
 				   	   palvelupisteet[2].lisaaJonoon(a);
@@ -81,6 +79,4 @@ public class OmaMoottori extends Moottori{
 		// UUTTA graafista
 		kontrolleri.naytaLoppuaika(Kello.getInstance().getAika());
 	}
-
-	
 }

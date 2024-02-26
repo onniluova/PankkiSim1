@@ -3,6 +3,9 @@ package simu.model;
 import simu.framework.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Random;
+import simu.framework.Tapahtuma;
 
 // TODO:
 // Asiakas koodataan simulointimallin edellyttämällä tavalla (data!)
@@ -11,27 +14,21 @@ public class Asiakas {
 	private double poistumisaika;
 	private int id;
 	private static int i = 1;
-	private static long sum = 0;
-
+	public static long sum = 0;
+	private int tapahtumanNumero = (int)(Math.random()*5+1);
 	public static int arviointienSumma;
 
 	double arviointi;
 
-	double kokonaisAika;
+	public double keskiarvo;
 
-	ArrayList<String> tapahtumat = new ArrayList<>();
+	double kokonaisAika;
 
 	public Asiakas(){
 		id = i++;
 
 		saapumisaika = Kello.getInstance().getAika();
 		Trace.out(Trace.Level.INFO, "Uusi asiakas nro " + id + " saapui klo "+saapumisaika);
-
-		tapahtumat.add("Laina");
-		tapahtumat.add("Talletus");
-		tapahtumat.add("Kortin uusiminen");
-		tapahtumat.add("Tilin avaaminen");
-		tapahtumat.add("Tilin sulkeminen");
 	}
 
 	public double getPoistumisaika() {
@@ -63,13 +60,12 @@ public class Asiakas {
 		Trace.out(Trace.Level.INFO,"Asiakas "+id+ " viipyi: " +(poistumisaika-saapumisaika));
 		palvelunArvio();
 		sum += (poistumisaika-saapumisaika);
-		double keskiarvo = sum/id;
+		keskiarvo = sum/id;
 		System.out.println("Asiakkaiden läpimenoaikojen keskiarvo tähän asti "+ keskiarvo);
 	}
 
 	public void tulokset(){
-		sum += (poistumisaika-saapumisaika);
-		double keskiarvo = sum/id;
+		keskiarvo = sum/id;
 		System.out.println("Asiakkaiden läpimenoaikojen keskiarvo: "+ keskiarvo);
 	}
 
@@ -118,9 +114,16 @@ public class Asiakas {
 		}
 	}
 
-	public void arvoTapahtuma(){
-		int arpa = (int)(Math.random()*5);
-		Trace.out(Trace.Level.INFO, "Asiakas "+id+ " valitsi palvelun: " +tapahtumat.get(arpa));
+	public int palautaArviointi() {
+		return (int)arviointi;
+	}
+
+	//public void arvoTapahtuma() {
+	//	System.out.println("Asiakas "+id+ " arpoi tapahtuman: "+ tapahtumanNumero);
+	//}
+
+	public int getTapahtuma() {
+		return tapahtumanNumero;
 	}
 
 	public int getArviointienKeskiarvo() {
