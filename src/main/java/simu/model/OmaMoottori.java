@@ -11,6 +11,8 @@ public class OmaMoottori extends Moottori{
 
 	private Palvelupiste[] palvelupisteet;
 
+	private Asiakas a;
+
 
 	public OmaMoottori(IKontrolleriForM kontrolleri){
 
@@ -36,7 +38,6 @@ public class OmaMoottori extends Moottori{
 	@Override
 	protected void suoritaTapahtuma(Tapahtuma t){  // B-vaiheen tapahtumat
 
-		Asiakas a;
 		switch ((TapahtumanTyyppi)t.getTyyppi()){
 
 			case ARR1: palvelupisteet[0].lisaaJonoon(new Asiakas());
@@ -73,7 +74,9 @@ public class OmaMoottori extends Moottori{
 	@Override
 	protected void tulokset() {
 		System.out.println("Simulointi päättyi kello " + Kello.getInstance().getAika());
-		System.out.println("Tulokset ... puuttuvat vielä");
+		a.tulokset();
+		System.out.println(a.getArviointienKeskiarvo());
+
 
 		// UUTTA graafista
 		kontrolleri.naytaLoppuaika(Kello.getInstance().getAika());

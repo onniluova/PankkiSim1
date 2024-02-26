@@ -13,6 +13,8 @@ public class Asiakas {
 	private static int i = 1;
 	private static long sum = 0;
 
+	public static int arviointienSumma;
+
 	double arviointi;
 
 	double kokonaisAika;
@@ -65,23 +67,36 @@ public class Asiakas {
 		System.out.println("Asiakkaiden läpimenoaikojen keskiarvo tähän asti "+ keskiarvo);
 	}
 
+	public void tulokset(){
+		sum += (poistumisaika-saapumisaika);
+		double keskiarvo = sum/id;
+		System.out.println("Asiakkaiden läpimenoaikojen keskiarvo: "+ keskiarvo);
+	}
+
+	//TODO: Jokaiselle palvelulle oma arvio
+
 	public void palvelunArvio() {
 		kokonaisAika = (getPoistumisaika() - getSaapumisaika());
 
 		if (kokonaisAika < 22) {
 			arviointi = 5;
+			arviointienSumma += arviointi;
 		}
 		else if (kokonaisAika < 26 && kokonaisAika > 22) {
 			arviointi = 4;
+			arviointienSumma += arviointi;
 		}
 		else if (kokonaisAika < 30 && kokonaisAika > 26) {
 			arviointi = 3;
+			arviointienSumma += arviointi;
 		}
 		else if (kokonaisAika < 34 && kokonaisAika > 30) {
 			arviointi = 2;
+			arviointienSumma += arviointi;
 		}
 		else {
 			arviointi = 1;
+			arviointienSumma += arviointi;
 		}
 
 		switch((int)arviointi) {
@@ -106,6 +121,10 @@ public class Asiakas {
 	public void arvoTapahtuma(){
 		int arpa = (int)(Math.random()*5);
 		Trace.out(Trace.Level.INFO, "Asiakas "+id+ " valitsi palvelun: " +tapahtumat.get(arpa));
+	}
+
+	public int getArviointienKeskiarvo() {
+		return arviointienSumma/id;
 	}
 
 	//TODO:
