@@ -54,8 +54,8 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI {
 
         Trace.setTraceLevel(Level.INFO);
         eventLog = new TextArea();
-        eventLog.setPrefHeight(200); // Set preferred height
-        eventLog.setEditable(false); // Make it non-editable
+        eventLog.setPrefHeight(200);
+        eventLog.setEditable(false);
     }
 
     @Override
@@ -86,7 +86,7 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI {
                 }
             });
 
-            eventLog.appendText("New event occurred\n");
+            eventLog.appendText("Tervetuloa pankkisimulaattoriin" + "\n");
 
 
             hidastaButton = new Button();

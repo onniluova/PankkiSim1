@@ -49,6 +49,9 @@ public class OmaMoottori extends Moottori{
 			case ARR1: palvelupisteet[0].lisaaJonoon(new Asiakas());
 				       saapumisprosessi.generoiSeuraava();
 					   kontrolleri.visualisoiAsiakas();
+					if (gui != null) {
+						gui.logEvent("Uusi asiakas " + a + " on pankissa");
+					}
 				break;
 			case DEP1: a = (Asiakas)palvelupisteet[0].otaJonosta();
 				   	   palvelupisteet[1].lisaaJonoon(a);
@@ -56,9 +59,6 @@ public class OmaMoottori extends Moottori{
 				break;
 			case DEP2: a = (Asiakas)palvelupisteet[1].otaJonosta();
 				   	   palvelupisteet[2].lisaaJonoon(a);
-					if (gui != null) {
-						gui.logEvent("Uusi asiakas " + a + " on pankissa");
-					}
 				break;
 			case DEP3:
 				       a = (Asiakas)palvelupisteet[2].otaJonosta();

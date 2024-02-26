@@ -5,6 +5,8 @@ import simu.framework.IMoottori;
 import simu.model.OmaMoottori;
 import view.ISimulaattorinUI;
 import view.SimulaattorinGUI;
+import view.Visualisointi;
+import view.Visualisointi2;
 
 public class Kontrolleri implements IKontrolleriForM, IKontrolleriForV{   // UUSI
 	
@@ -56,7 +58,7 @@ public class Kontrolleri implements IKontrolleriForM, IKontrolleriForV{   // UUS
 	public void visualisoiAsiakas() {
 		Platform.runLater(new Runnable(){
 			public void run(){
-				ui.getVisualisointi().uusiAsiakas();
+				((Visualisointi) ui.getVisualisointi()).uusiAsiakas();
 			}
 		});
 	}
