@@ -4,6 +4,7 @@ import simu.framework.*;
 import eduni.distributions.Negexp;
 import eduni.distributions.Normal;
 import controller.IKontrolleriForM;
+import view.SimulaattorinGUI;
 
 public class OmaMoottori extends Moottori{
 	
@@ -13,10 +14,19 @@ public class OmaMoottori extends Moottori{
 
 	private Asiakas a;
 
+	private SimulaattorinGUI gui;
 
-	public OmaMoottori(IKontrolleriForM kontrolleri){
+
+	public OmaMoottori(IKontrolleriForM kontrolleri, SimulaattorinGUI gui){
 
 		super(kontrolleri);
+		this.gui = gui;
+		initialize();
+
+	}
+
+	private void initialize() {
+		SimulaattorinGUI gui = new SimulaattorinGUI();
 
 		palvelupisteet = new Palvelupiste[4];
 
@@ -26,9 +36,7 @@ public class OmaMoottori extends Moottori{
 		palvelupisteet[3]=new Palvelupiste(new Normal(5,3), tapahtumalista, TapahtumanTyyppi.DEP4);
 
 		saapumisprosessi = new Saapumisprosessi(new Negexp(15,5), tapahtumalista, TapahtumanTyyppi.ARR1);
-
 	}
-
 
 	@Override
 	protected void alustukset() {
@@ -40,7 +48,7 @@ public class OmaMoottori extends Moottori{
 		switch ((TapahtumanTyyppi)t.getTyyppi()){
 			case ARR1: palvelupisteet[0].lisaaJonoon(new Asiakas());
 				       saapumisprosessi.generoiSeuraava();
-					   kontrolleri.visualisoiAsiakas(); // UUSI
+					   kontrolleri.visualisoiAsiakas();
 				break;
 			case DEP1: a = (Asiakas)palvelupisteet[0].otaJonosta();
 				   	   palvelupisteet[1].lisaaJonoon(a);
@@ -48,6 +56,9 @@ public class OmaMoottori extends Moottori{
 				break;
 			case DEP2: a = (Asiakas)palvelupisteet[1].otaJonosta();
 				   	   palvelupisteet[2].lisaaJonoon(a);
+					if (gui != null) {
+						gui.logEvent("Uusi asiakas " + a + " on pankissa");
+					}
 				break;
 			case DEP3:
 				       a = (Asiakas)palvelupisteet[2].otaJonosta();

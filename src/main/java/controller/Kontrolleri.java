@@ -4,15 +4,18 @@ import javafx.application.Platform;
 import simu.framework.IMoottori;
 import simu.model.OmaMoottori;
 import view.ISimulaattorinUI;
+import view.SimulaattorinGUI;
 
 public class Kontrolleri implements IKontrolleriForM, IKontrolleriForV{   // UUSI
 	
 	private IMoottori moottori; 
 	private ISimulaattorinUI ui;
+	private SimulaattorinGUI gui;
 	
 	public Kontrolleri(ISimulaattorinUI ui) {
 		this.ui = ui;
-		
+		this.gui = (SimulaattorinGUI) ui;
+		this.moottori = new OmaMoottori(this, gui);
 	}
 
 	
@@ -20,7 +23,7 @@ public class Kontrolleri implements IKontrolleriForM, IKontrolleriForV{   // UUS
 		
 	@Override
 	public void kaynnistaSimulointi() {
-		moottori = new OmaMoottori(this); // luodaan uusi moottorisäie jokaista simulointia varten
+		moottori = new OmaMoottori(this, gui); // luodaan uusi moottorisäie jokaista simulointia varten
 		moottori.setSimulointiaika(ui.getAika());
 		moottori.setViive(ui.getViive());
 		ui.getVisualisointi().tyhjennaNaytto();

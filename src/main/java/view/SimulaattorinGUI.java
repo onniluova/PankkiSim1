@@ -18,6 +18,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.text.*;
+import simu.model.OmaMoottori;
 
 
 
@@ -25,6 +26,8 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI {
 
     //Kontrollerin esittely (tarvitaan käyttöliittymässä)
     private IKontrolleriForV kontrolleri;
+
+    private OmaMoottori moottori; // Add this line
 
     // Käyttöliittymäkomponentit:
     private TextField aika;
@@ -40,13 +43,19 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI {
 
     private IVisualisointi naytto;
 
+    private TextArea eventLog;
+
+    public void logEvent(String eventText) {
+        eventLog.appendText(eventText + "\n");
+    }
 
     @Override
     public void init() {
 
         Trace.setTraceLevel(Level.INFO);
-
-        kontrolleri = new Kontrolleri(this);
+        eventLog = new TextArea();
+        eventLog.setPrefHeight(200); // Set preferred height
+        eventLog.setEditable(false); // Make it non-editable
     }
 
     @Override
@@ -62,6 +71,8 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI {
                 }
             });
 
+            kontrolleri = new Kontrolleri(this);
+            moottori = new OmaMoottori((IKontrolleriForM) kontrolleri, this);
 
             primaryStage.setTitle("Simulaattori");
 
@@ -74,6 +85,9 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI {
                     kaynnistaButton.setDisable(true);
                 }
             });
+
+            eventLog.appendText("New event occurred\n");
+
 
             hidastaButton = new Button();
             hidastaButton.setText("Hidasta");
@@ -123,7 +137,7 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI {
             naytto = new Visualisointi(400, 200);
 
             // TÃ¤ytetÃ¤Ã¤n boxi:
-            hBox.getChildren().addAll(grid, (Canvas) naytto);
+            hBox.getChildren().addAll(grid, (Canvas) naytto, eventLog);
 
             Scene scene = new Scene(hBox);
             primaryStage.setScene(scene);
