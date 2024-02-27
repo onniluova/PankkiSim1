@@ -12,6 +12,8 @@ public class OmaMoottori extends Moottori{
 
 	private Palvelupiste[] palvelupisteet;
 
+	private PalvelupisteidenArviot p;
+
 	private Asiakas a;
 
 	private SimulaattorinGUI gui;
@@ -27,7 +29,7 @@ public class OmaMoottori extends Moottori{
 
 	private void initialize() {
 		SimulaattorinGUI gui = new SimulaattorinGUI();
-
+		p = new PalvelupisteidenArviot();
 		palvelupisteet = new Palvelupiste[4];
 
 		palvelupisteet[0]=new Palvelupiste(new Normal(10,6), tapahtumalista, TapahtumanTyyppi.DEP1);
@@ -56,6 +58,7 @@ public class OmaMoottori extends Moottori{
 			case DEP1: a = (Asiakas)palvelupisteet[0].otaJonosta();
 				   	   palvelupisteet[1].lisaaJonoon(a);
 						  a.getTapahtuma();
+						gui.logEvent("Asiakas " + a + " valitsi tapahtuman " + a.getTapahtuma());
 				break;
 			case DEP2: a = (Asiakas)palvelupisteet[1].otaJonosta();
 				   	   palvelupisteet[2].lisaaJonoon(a);
@@ -68,6 +71,8 @@ public class OmaMoottori extends Moottori{
 				a = (Asiakas)palvelupisteet[3].otaJonosta();
 				a.setPoistumisaika(Kello.getInstance().getAika());
 				a.raportti();
+				p.lisaaAsiakkaanArvio(a);
+				gui.logEvent("Asiakas " + a + " antoi tapahtumalle " + a.getTapahtuma() + " arvion " + a.palautaArviointi());
 		}
 	}
 

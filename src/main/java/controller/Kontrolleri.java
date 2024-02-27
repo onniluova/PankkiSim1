@@ -62,7 +62,4 @@ public class Kontrolleri implements IKontrolleriForM, IKontrolleriForV{   // UUS
 			}
 		});
 	}
-
-
-
 }

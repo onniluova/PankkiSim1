@@ -69,8 +69,6 @@ public class Asiakas {
 		System.out.println("Asiakkaiden läpimenoaikojen keskiarvo: "+ keskiarvo);
 	}
 
-	//TODO: Jokaiselle palvelulle oma arvio
-
 	public void palvelunArvio() {
 		kokonaisAika = (getPoistumisaika() - getSaapumisaika());
 
@@ -129,8 +127,5 @@ public class Asiakas {
 	public int getArviointienKeskiarvo() {
 		return arviointienSumma/id;
 	}
-
-	//TODO:
-	//Asiakaspalaute metodi mihin otetaan asiakkaan viettämä aika palvelupisteellä.
 
 }
