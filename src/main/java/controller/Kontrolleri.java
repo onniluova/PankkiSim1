@@ -58,7 +58,7 @@ public class Kontrolleri implements IKontrolleriForM, IKontrolleriForV{   // UUS
 	public void visualisoiAsiakas() {
 		Platform.runLater(new Runnable(){
 			public void run(){
-				((Visualisointi) ui.getVisualisointi()).uusiAsiakas();
+				(ui.getVisualisointi()).uusiAsiakas();
 			}
 		});
 	}
