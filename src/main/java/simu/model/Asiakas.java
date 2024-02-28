@@ -15,7 +15,7 @@ public class Asiakas {
 	private int id;
 	private static int i = 1;
 	public static long sum = 0;
-	private int tapahtumanNumero = (int)(Math.random()*5+1);
+	private int tapahtumanNumero = (int)(Math.random()*5);
 	public static int arviointienSumma;
 
 	double arviointi;
