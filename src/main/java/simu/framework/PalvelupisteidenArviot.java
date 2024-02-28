@@ -27,6 +27,11 @@ public class PalvelupisteidenArviot {
         }
     }
 
+    public String palautaArviotStringina(){
+        return palvelupisteidenArviot.toString();
+    }
+
+    //TODO: Jaa palvelupisteiden arviot tapahtumien määrillä
     public void lisaaAsiakkaanArvio(Asiakas asiakas){
         int tapahtuma = asiakas.getTapahtuma();
         int arvio = asiakas.palautaArviointi();

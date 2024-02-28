@@ -52,13 +52,13 @@ public class OmaMoottori extends Moottori{
 				       saapumisprosessi.generoiSeuraava();
 					   kontrolleri.visualisoiAsiakas();
 					if (gui != null) {
-						gui.logEvent("Uusi asiakas " + a + " on pankissa");
+						//gui.logEvent("Uusi asiakas " + a + " on pankissa");
 					}
 				break;
 			case DEP1: a = (Asiakas)palvelupisteet[0].otaJonosta();
 				   	   palvelupisteet[1].lisaaJonoon(a);
 						  a.getTapahtuma();
-						gui.logEvent("Asiakas " + a + " valitsi tapahtuman " + a.getTapahtuma());
+						//gui.logEvent("Asiakas " + a + " valitsi tapahtuman " + a.getTapahtuma());
 				break;
 			case DEP2: a = (Asiakas)palvelupisteet[1].otaJonosta();
 				   	   palvelupisteet[2].lisaaJonoon(a);
@@ -72,7 +72,6 @@ public class OmaMoottori extends Moottori{
 				a.setPoistumisaika(Kello.getInstance().getAika());
 				a.raportti();
 				p.lisaaAsiakkaanArvio(a);
-				gui.logEvent("Asiakas " + a + " antoi tapahtumalle " + a.getTapahtuma() + " arvion " + a.palautaArviointi());
 		}
 	}
 
@@ -85,11 +84,13 @@ public class OmaMoottori extends Moottori{
 		}
 	}
 
+	//TODO: Kunnon tulokset eventLogilla.
 	@Override
 	protected void tulokset() {
 		System.out.println("Simulointi päättyi kello " + Kello.getInstance().getAika());
 		a.tulokset();
 		System.out.println(a.getArviointienKeskiarvo());
+		gui.logEvent(p.palautaArviotStringina());
 
 
 		// UUTTA graafista
