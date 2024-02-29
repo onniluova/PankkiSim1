@@ -36,4 +36,4 @@ public class Visualisointi2 extends Canvas implements IVisualisointi{
 	}
 	
 
-}
+

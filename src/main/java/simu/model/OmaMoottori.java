@@ -5,6 +5,9 @@ import eduni.distributions.Negexp;
 import eduni.distributions.Normal;
 import controller.IKontrolleriForM;
 import view.SimulaattorinGUI;
+import simu.framework.IkaGeneraattori;
+
+import java.util.ArrayList;
 
 public class OmaMoottori extends Moottori{
 	

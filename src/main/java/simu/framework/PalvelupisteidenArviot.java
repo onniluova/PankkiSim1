@@ -27,11 +27,22 @@ public class PalvelupisteidenArviot {
         }
     }
 
-    public String palautaArviotStringina(){
+    public String palautaArviotStringina() {
         return palvelupisteidenArviot.toString();
     }
 
-    //TODO: Jaa palvelupisteiden arviot tapahtumien määrillä
+    public String palautaKeskiarvoPalveluista() {
+        double[] keskiarvot = new double[5];
+        for (int i = 0; i < 5; i++) {
+            if (tapahtumienMaarat[i] != 0) {
+                keskiarvot[i] = (double)palvelupisteidenArviot.get(i) / tapahtumienMaarat[i];
+            }
+        }
+        return "Laina: " + keskiarvot[0] + "\nTalletus: " + keskiarvot[1] + "\nKortin uusiminen: " + keskiarvot[2] + "\nTilin avaaminen: " + keskiarvot[3] + "\nTilin sulkeminen: " + keskiarvot[4];
+    }
+
+
+    //TODO: Laske arviointien määrästä keskiarvo jokaiselle palvelulle
     public void lisaaAsiakkaanArvio(Asiakas asiakas){
         int tapahtuma = asiakas.getTapahtuma();
         int arvio = asiakas.palautaArviointi();

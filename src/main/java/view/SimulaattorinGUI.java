@@ -21,7 +21,6 @@ import javafx.scene.text.*;
 import simu.model.OmaMoottori;
 
 
-
 public class SimulaattorinGUI extends Application implements ISimulaattorinUI {
 
     //Kontrollerin esittely (tarvitaan käyttöliittymässä)
@@ -149,7 +148,6 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI {
         }
     }
 
-
     //Käyttöliittymän rajapintametodit (kutsutaan kontrollerista)
 
     @Override
@@ -167,7 +165,6 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI {
         DecimalFormat formatter = new DecimalFormat("#0.00");
         this.tulos.setText(formatter.format(aika));
     }
-
 
     @Override
     public IVisualisointi getVisualisointi() {

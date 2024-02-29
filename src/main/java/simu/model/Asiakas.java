@@ -3,13 +3,18 @@ package simu.model;
 import simu.framework.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Random;
 import simu.framework.Tapahtuma;
+import eduni.distributions.*;
+import simu.framework.IkaGeneraattori;
+import simu.framework.MuunnaAika;
 
 // TODO:
 // Asiakas koodataan simulointimallin edellyttämällä tavalla (data!)
 public class Asiakas {
+	private Uniform uniformDistribution;
 	private double saapumisaika;
 	private double poistumisaika;
 	private int id;
@@ -24,8 +29,15 @@ public class Asiakas {
 
 	double kokonaisAika;
 
+	int ika;
+
+	public ArrayList<Integer> iat;
+
 	public Asiakas(){
 		id = i++;
+		this.ika = new IkaGeneraattori(18, 65).generoiIka();
+		iat = new ArrayList<>();
+		iat.add(ika);
 
 		saapumisaika = Kello.getInstance().getAika();
 		Trace.out(Trace.Level.INFO, "Uusi asiakas nro " + id + " saapui klo "+saapumisaika);
@@ -47,21 +59,27 @@ public class Asiakas {
 		this.saapumisaika = saapumisaika;
 	}
 
-
-
 	public int getId() {
 		return id;
 	}
 
 	public void raportti(){
 		Trace.out(Trace.Level.INFO, "\nAsiakas "+id+ " valmis! ");
-		Trace.out(Trace.Level.INFO, "Asiakas "+id+ " saapui: " +saapumisaika);
+		Trace.out(Trace.Level.INFO, "Asiakas "+id+ " saapui: " + (MuunnaAika.toMinutes(saapumisaika)) + " minuuttia ja " + (MuunnaAika.toSeconds(saapumisaika)) + " sekuntia");
 		Trace.out(Trace.Level.INFO,"Asiakas "+id+ " poistui: " +poistumisaika);
 		Trace.out(Trace.Level.INFO,"Asiakas "+id+ " viipyi: " +(poistumisaika-saapumisaika));
 		palvelunArvio();
 		sum += (poistumisaika-saapumisaika);
 		keskiarvo = sum/id;
 		System.out.println("Asiakkaiden läpimenoaikojen keskiarvo tähän asti "+ keskiarvo);
+	}
+
+	public int ianKeskiarvo() {
+		int summa = 0;
+		for (int ika : iat) {
+			summa += ika;
+		}
+		return summa/iat.size();
 	}
 
 	public void tulokset(){
