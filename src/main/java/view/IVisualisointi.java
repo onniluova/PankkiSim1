@@ -7,6 +7,11 @@ public interface IVisualisointi {
 	
 	public void uusiAsiakas();
 
+	public void lisaaAsiakasJonoon();
+
+	public void poistaJonosta();
+
+	public void piirraVarattu(int index, boolean occupied);
 		
 }
 

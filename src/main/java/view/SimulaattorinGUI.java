@@ -98,13 +98,15 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI {
 
             aikaLabel = new Label("Simulointiaika:");
             aikaLabel.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
-            aika = new TextField("Syötä aika");
+            aika = new TextField();
+            aika.setPromptText("Syötä aika");
             aika.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
             aika.setPrefWidth(150);
 
             viiveLabel = new Label("Viive:");
             viiveLabel.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
-            viive = new TextField("Syötä viive");
+            viive = new TextField();
+            viive.setPromptText("Syötä viive");
             viive.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
             viive.setPrefWidth(150);
 
@@ -133,7 +135,7 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI {
             grid.add(nopeutaButton, 0, 4);   // sarake, rivi
             grid.add(hidastaButton, 1, 4);   // sarake, rivi
 
-            naytto = new Visualisointi(400, 200);
+            naytto = new Visualisointi2(400, 200);
 
             // TÃ¤ytetÃ¤Ã¤n boxi:
             hBox.getChildren().addAll(grid, (Canvas) naytto, eventLog);

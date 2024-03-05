@@ -43,8 +43,6 @@ public class Kontrolleri implements IKontrolleriForM, IKontrolleriForV{   // UUS
 		moottori.setViive((long)(moottori.getViive()*0.9));
 	}
 	
-	
-	
 	// Simulointitulosten välittämistä käyttöliittymään.
 	// Koska FX-ui:n päivitykset tulevat moottorisäikeestä, ne pitää ohjata JavaFX-säikeeseen:
 		
@@ -53,6 +51,29 @@ public class Kontrolleri implements IKontrolleriForM, IKontrolleriForV{   // UUS
 		Platform.runLater(()->ui.setLoppuaika(aika)); 
 	}
 
+	public void visualisoiJono() {
+		Platform.runLater(new Runnable(){
+			public void run(){
+				(ui.getVisualisointi()).lisaaAsiakasJonoon();
+			}
+		});
+	}
+
+	public void visualisoiJonostaPoisto() {
+		Platform.runLater(new Runnable(){
+			public void run(){
+				(ui.getVisualisointi()).poistaJonosta();
+			}
+		});
+	}
+
+	public void drawPalveluPiste(int index, boolean isReserved) {
+		Platform.runLater(new Runnable(){
+			public void run(){
+				(ui.getVisualisointi()).piirraVarattu(index, isReserved);
+			}
+		});
+	}
 	
 	@Override
 	public void visualisoiAsiakas() {

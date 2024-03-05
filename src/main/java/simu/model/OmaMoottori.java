@@ -54,12 +54,14 @@ public class OmaMoottori extends Moottori{
 			case ARR1: palvelupisteet[0].lisaaJonoon(new Asiakas());
 				       saapumisprosessi.generoiSeuraava();
 					   kontrolleri.visualisoiAsiakas();
+						kontrolleri.visualisoiJono();
 					if (gui != null) {
 						//gui.logEvent("Uusi asiakas " + a + " on pankissa");
 					}
 				break;
 			case DEP1: a = (Asiakas)palvelupisteet[0].otaJonosta();
 				   	   palvelupisteet[1].lisaaJonoon(a);
+						kontrolleri.visualisoiJonostaPoisto();
 						  a.getTapahtuma();
 						//gui.logEvent("Asiakas " + a + " valitsi tapahtuman " + a.getTapahtuma());
 				break;
@@ -82,6 +84,10 @@ public class OmaMoottori extends Moottori{
 	protected void yritaCTapahtumat(){
 		for (Palvelupiste p: palvelupisteet){
 			if (!p.onVarattu() && p.onJonossa()){
+				kontrolleri.drawPalveluPiste(0, palvelupisteet[0].onVarattu());
+				kontrolleri.drawPalveluPiste(1, palvelupisteet[1].onVarattu());
+				kontrolleri.drawPalveluPiste(2, palvelupisteet[2].onVarattu());
+				kontrolleri.drawPalveluPiste(3, palvelupisteet[3].onVarattu());
 				p.aloitaPalvelu();
 			}
 		}
@@ -91,9 +97,11 @@ public class OmaMoottori extends Moottori{
 	@Override
 	protected void tulokset() {
 		System.out.println("Simulointi päättyi kello " + Kello.getInstance().getAika());
-		a.tulokset();
+		a.asiakkaanTulokset();
 		System.out.println(a.getArviointienKeskiarvo());
-		gui.logEvent(p.palautaArviotStringina());
+		gui.logEvent("Asiakkaiden keskimääräinen ikä: " + String.valueOf(a.ianKeskiarvo()));
+		gui.logEvent("Asiakkaiden antamat arviot:\n" + p.palautaKeskiarvoPalveluista());
+
 
 
 		// UUTTA graafista
