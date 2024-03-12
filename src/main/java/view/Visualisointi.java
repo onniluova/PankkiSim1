@@ -6,10 +6,16 @@ import javafx.scene.paint.Color;
 
 public class Visualisointi extends Canvas implements IVisualisointi{
 
+	Canvas canvas;
 	private final GraphicsContext gc;
 	
 	double i = 0;
 	double j = 10;
+
+	@Override
+	public Canvas getCanvas() {
+		return this;
+	}
 	
 	
 	public Visualisointi(int w, int h) {

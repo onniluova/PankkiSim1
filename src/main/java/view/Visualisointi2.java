@@ -16,6 +16,11 @@ public class Visualisointi2 extends Canvas implements IVisualisointi {
 
 	private double linePosition = 20; // Initial position
 
+	@Override
+	public Canvas getCanvas() {
+		return this;
+	}
+
 	public Visualisointi2(int w, int h) {
 		super(w, h);
 		gc = this.getGraphicsContext2D();

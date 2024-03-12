@@ -2,30 +2,30 @@ package controller;
 
 import javafx.application.Platform;
 import simu.framework.IMoottori;
+import simu.framework.Trace;
 import simu.model.OmaMoottori;
 import view.ISimulaattorinUI;
 import view.SimulaattorinGUI;
 import view.Visualisointi;
 import view.Visualisointi2;
+import simu.framework.Trace.Level;
 
 public class Kontrolleri implements IKontrolleriForM, IKontrolleriForV{   // UUSI
 	
-	private IMoottori moottori; 
+	private IMoottori moottori;
 	private ISimulaattorinUI ui;
-	private SimulaattorinGUI gui;
-	
+
 	public Kontrolleri(ISimulaattorinUI ui) {
 		this.ui = ui;
-		this.gui = (SimulaattorinGUI) ui;
-		this.moottori = new OmaMoottori(this, gui);
+		this.moottori = new OmaMoottori(this, ui);
 	}
-
 	
 	// Moottorin ohjausta:
 		
 	@Override
 	public void kaynnistaSimulointi() {
-		moottori = new OmaMoottori(this, gui); // luodaan uusi moottorisäie jokaista simulointia varten
+		Trace.setTraceLevel(Trace.Level.INFO);
+		moottori = new OmaMoottori(this, ui); // luodaan uusi moottorisäie jokaista simulointia varten
 		moottori.setSimulointiaika(ui.getAika());
 		moottori.setViive(ui.getViive());
 		ui.getVisualisointi().tyhjennaNaytto();
@@ -55,6 +55,7 @@ public class Kontrolleri implements IKontrolleriForM, IKontrolleriForV{   // UUS
 		Platform.runLater(new Runnable(){
 			public void run(){
 				(ui.getVisualisointi()).lisaaAsiakasJonoon();
+				((GUIkontrolleri)ui).updateCanvas();
 			}
 		});
 	}

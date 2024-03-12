@@ -3,6 +3,7 @@ package simu.framework;
 import simu.model.Asiakas;
 
 import java.lang.reflect.Array;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -14,6 +15,8 @@ public class PalvelupisteidenArviot {
     int index = 0;
     int numberToAdd = 1;
     int[] tapahtumienMaarat = new int[5];
+
+    DecimalFormat decimalFormat = new DecimalFormat("#.##");
 
     public PalvelupisteidenArviot() {
         tapahtumat.add(0);
@@ -38,7 +41,7 @@ public class PalvelupisteidenArviot {
                 keskiarvot[i] = (double)palvelupisteidenArviot.get(i) / tapahtumienMaarat[i];
             }
         }
-        return "Laina: " + keskiarvot[0] + "\nTalletus: " + keskiarvot[1] + "\nKortin uusiminen: " + keskiarvot[2] + "\nTilin avaaminen: " + keskiarvot[3] + "\nTilin sulkeminen: " + keskiarvot[4];
+        return "Laina: " + decimalFormat.format(keskiarvot[0]) + "\nTalletus: " + decimalFormat.format(keskiarvot[1]) + "\nKortin uusiminen: " + decimalFormat.format(keskiarvot[2]) + "\nTilin avaaminen: " + decimalFormat.format(keskiarvot[3]) + "\nTilin sulkeminen: " + decimalFormat.format(keskiarvot[4]);
     }
 
 

@@ -1,16 +1,19 @@
 package simu.model;
 
+import controller.GUIkontrolleri;
 import simu.framework.*;
 import eduni.distributions.Negexp;
 import eduni.distributions.Normal;
 import controller.IKontrolleriForM;
 import view.SimulaattorinGUI;
 import simu.framework.IkaGeneraattori;
+import view.ISimulaattorinUI;
 
 import java.util.ArrayList;
 
 public class OmaMoottori extends Moottori{
-	
+	private ISimulaattorinUI ui;
+
 	private Saapumisprosessi saapumisprosessi;
 
 	private Palvelupiste[] palvelupisteet;
@@ -21,11 +24,14 @@ public class OmaMoottori extends Moottori{
 
 	private SimulaattorinGUI gui;
 
+	private GUIkontrolleri guiKontrolleri;
 
-	public OmaMoottori(IKontrolleriForM kontrolleri, SimulaattorinGUI gui){
+
+	public OmaMoottori(IKontrolleriForM kontrolleri, ISimulaattorinUI ui){
 
 		super(kontrolleri);
-		this.gui = gui;
+		this.ui = ui;
+		this.guiKontrolleri = (GUIkontrolleri) ui;
 		initialize();
 
 	}
@@ -99,8 +105,8 @@ public class OmaMoottori extends Moottori{
 		System.out.println("Simulointi päättyi kello " + Kello.getInstance().getAika());
 		a.asiakkaanTulokset();
 		System.out.println(a.getArviointienKeskiarvo());
-		gui.logEvent("Asiakkaiden keskimääräinen ikä: " + String.valueOf(a.ianKeskiarvo()));
-		gui.logEvent("Asiakkaiden antamat arviot:\n" + p.palautaKeskiarvoPalveluista());
+		guiKontrolleri.logEvent("Asiakkaiden keskimääräinen ikä: " + String.valueOf(a.ianKeskiarvo()));
+		guiKontrolleri.logEvent("Asiakkaiden antamat arviot:\n" + p.palautaKeskiarvoPalveluista());
 
 
 
