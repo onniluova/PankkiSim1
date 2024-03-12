@@ -64,7 +64,9 @@ public class Kontrolleri implements IKontrolleriForM, IKontrolleriForV{   // UUS
 		Platform.runLater(new Runnable(){
 			public void run(){
 				(ui.getVisualisointi()).poistaJonosta();
+				((GUIkontrolleri)ui).updateCanvas();
 			}
+
 		});
 	}
 
@@ -72,6 +74,7 @@ public class Kontrolleri implements IKontrolleriForM, IKontrolleriForV{   // UUS
 		Platform.runLater(new Runnable(){
 			public void run(){
 				(ui.getVisualisointi()).piirraVarattu(index, isReserved);
+				((GUIkontrolleri)ui).updateCanvas();
 			}
 		});
 	}
@@ -81,6 +84,7 @@ public class Kontrolleri implements IKontrolleriForM, IKontrolleriForV{   // UUS
 		Platform.runLater(new Runnable(){
 			public void run(){
 				(ui.getVisualisointi()).uusiAsiakas();
+				((GUIkontrolleri)ui).updateCanvas();
 			}
 		});
 	}
