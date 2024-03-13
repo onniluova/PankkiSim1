@@ -62,4 +62,20 @@ public class DaoController {
             return null;
         }
     }
+    public void persist(Tulos tulos) {
+        Connection conn = MariaDbConnection.getConnection();
+        String sql = "INSERT INTO tulokset (kokonaisaika, palvelun_keskiarvo, asiakkaiden_maara, asiakkaiden_keskimaarainen_ika) VALUES (?, ?, ?, ?)";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setDouble(1, tulos.getKokonaisaika());
+            ps.setDouble(2, tulos.getPalvelun_keskiarvo());
+            ps.setInt(3, tulos.getAsiakkaiden_maara());
+            ps.setDouble(4, tulos.getAsiakkaiden_keskimaarainen_ika());
+
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
