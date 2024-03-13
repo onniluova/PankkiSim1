@@ -3,33 +3,44 @@ package simu.model;
 import simu.framework.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Random;
+import simu.framework.Tapahtuma;
+import eduni.distributions.*;
+import simu.framework.IkaGeneraattori;
+import simu.framework.MuunnaAika;
 
 // TODO:
 // Asiakas koodataan simulointimallin edellyttämällä tavalla (data!)
 public class Asiakas {
+	private Uniform uniformDistribution;
 	private double saapumisaika;
 	private double poistumisaika;
 	private int id;
 	private static int i = 1;
-	private static long sum = 0;
+	public static long sum = 0;
+	private int tapahtumanNumero = (int)(Math.random()*5);
+	public static int arviointienSumma;
 
 	double arviointi;
 
+	public double keskiarvo;
+
 	double kokonaisAika;
 
-	ArrayList<String> tapahtumat = new ArrayList<>();
+	int ika;
+
+	public ArrayList<Integer> iat;
 
 	public Asiakas(){
 		id = i++;
+		this.ika = new IkaGeneraattori(18, 65).generoiIka();
+		iat = new ArrayList<>();
+		iat.add(ika);
 
 		saapumisaika = Kello.getInstance().getAika();
 		Trace.out(Trace.Level.INFO, "Uusi asiakas nro " + id + " saapui klo "+saapumisaika);
-
-		tapahtumat.add("Laina");
-		tapahtumat.add("Talletus");
-		tapahtumat.add("Kortin uusiminen");
-		tapahtumat.add("Tilin avaaminen");
-		tapahtumat.add("Tilin sulkeminen");
 	}
 
 	public double getPoistumisaika() {
@@ -48,21 +59,32 @@ public class Asiakas {
 		this.saapumisaika = saapumisaika;
 	}
 
-
-
 	public int getId() {
 		return id;
 	}
 
 	public void raportti(){
 		Trace.out(Trace.Level.INFO, "\nAsiakas "+id+ " valmis! ");
-		Trace.out(Trace.Level.INFO, "Asiakas "+id+ " saapui: " +saapumisaika);
+		Trace.out(Trace.Level.INFO, "Asiakas "+id+ " saapui: " + (MuunnaAika.toMinutes(saapumisaika)) + " minuuttia ja " + (MuunnaAika.toSeconds(saapumisaika)) + " sekuntia");
 		Trace.out(Trace.Level.INFO,"Asiakas "+id+ " poistui: " +poistumisaika);
 		Trace.out(Trace.Level.INFO,"Asiakas "+id+ " viipyi: " +(poistumisaika-saapumisaika));
 		palvelunArvio();
 		sum += (poistumisaika-saapumisaika);
-		double keskiarvo = sum/id;
+		keskiarvo = sum/id;
 		System.out.println("Asiakkaiden läpimenoaikojen keskiarvo tähän asti "+ keskiarvo);
+	}
+
+	public int ianKeskiarvo() {
+		int summa = 0;
+		for (int ika : iat) {
+			summa += ika;
+		}
+		return summa/iat.size();
+	}
+
+	public void tulokset(){
+		keskiarvo = sum/id;
+		System.out.println("Asiakkaiden läpimenoaikojen keskiarvo: "+ keskiarvo);
 	}
 
 	public void palvelunArvio() {
@@ -70,18 +92,23 @@ public class Asiakas {
 
 		if (kokonaisAika < 22) {
 			arviointi = 5;
+			arviointienSumma += arviointi;
 		}
 		else if (kokonaisAika < 26 && kokonaisAika > 22) {
 			arviointi = 4;
+			arviointienSumma += arviointi;
 		}
 		else if (kokonaisAika < 30 && kokonaisAika > 26) {
 			arviointi = 3;
+			arviointienSumma += arviointi;
 		}
 		else if (kokonaisAika < 34 && kokonaisAika > 30) {
 			arviointi = 2;
+			arviointienSumma += arviointi;
 		}
 		else {
 			arviointi = 1;
+			arviointienSumma += arviointi;
 		}
 
 		switch((int)arviointi) {
@@ -103,12 +130,20 @@ public class Asiakas {
 		}
 	}
 
-	public void arvoTapahtuma(){
-		int arpa = (int)(Math.random()*5);
-		Trace.out(Trace.Level.INFO, "Asiakas "+id+ " valitsi palvelun: " +tapahtumat.get(arpa));
+	public int palautaArviointi() {
+		return (int)arviointi;
 	}
 
-	//TODO:
-	//Asiakaspalaute metodi mihin otetaan asiakkaan viettämä aika palvelupisteellä.
+	//public void arvoTapahtuma() {
+	//	System.out.println("Asiakas "+id+ " arpoi tapahtuman: "+ tapahtumanNumero);
+	//}
+
+	public int getTapahtuma() {
+		return tapahtumanNumero;
+	}
+
+	public int getArviointienKeskiarvo() {
+		return arviointienSumma/id;
+	}
 
 }

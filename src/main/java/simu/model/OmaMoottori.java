@@ -1,21 +1,44 @@
 package simu.model;
 
+import controller.GUIkontrolleri;
 import simu.framework.*;
 import eduni.distributions.Negexp;
 import eduni.distributions.Normal;
 import controller.IKontrolleriForM;
+import view.SimulaattorinGUI;
+import simu.framework.IkaGeneraattori;
+import view.ISimulaattorinUI;
+
+import java.util.ArrayList;
 
 public class OmaMoottori extends Moottori{
-	
+	private ISimulaattorinUI ui;
+
 	private Saapumisprosessi saapumisprosessi;
 
 	private Palvelupiste[] palvelupisteet;
 
+	private PalvelupisteidenArviot p;
 
-	public OmaMoottori(IKontrolleriForM kontrolleri){
+	private Asiakas a;
+
+	private SimulaattorinGUI gui;
+
+	private GUIkontrolleri guiKontrolleri;
+
+
+	public OmaMoottori(IKontrolleriForM kontrolleri, ISimulaattorinUI ui){
 
 		super(kontrolleri);
+		this.ui = ui;
+		this.guiKontrolleri = (GUIkontrolleri) ui;
+		initialize();
 
+	}
+
+	private void initialize() {
+		SimulaattorinGUI gui = new SimulaattorinGUI();
+		p = new PalvelupisteidenArviot();
 		palvelupisteet = new Palvelupiste[4];
 
 		palvelupisteet[0]=new Palvelupiste(new Normal(10,6), tapahtumalista, TapahtumanTyyppi.DEP1);
@@ -24,9 +47,7 @@ public class OmaMoottori extends Moottori{
 		palvelupisteet[3]=new Palvelupiste(new Normal(5,3), tapahtumalista, TapahtumanTyyppi.DEP4);
 
 		saapumisprosessi = new Saapumisprosessi(new Negexp(15,5), tapahtumalista, TapahtumanTyyppi.ARR1);
-
 	}
-
 
 	@Override
 	protected void alustukset() {
@@ -35,17 +56,20 @@ public class OmaMoottori extends Moottori{
 
 	@Override
 	protected void suoritaTapahtuma(Tapahtuma t){  // B-vaiheen tapahtumat
-
-		Asiakas a;
 		switch ((TapahtumanTyyppi)t.getTyyppi()){
-
 			case ARR1: palvelupisteet[0].lisaaJonoon(new Asiakas());
 				       saapumisprosessi.generoiSeuraava();
-					   kontrolleri.visualisoiAsiakas(); // UUSI
+					   kontrolleri.visualisoiAsiakas();
+						kontrolleri.visualisoiJono();
+					if (gui != null) {
+						//gui.logEvent("Uusi asiakas " + a + " on pankissa");
+					}
 				break;
 			case DEP1: a = (Asiakas)palvelupisteet[0].otaJonosta();
 				   	   palvelupisteet[1].lisaaJonoon(a);
-						  a.arvoTapahtuma();
+						kontrolleri.visualisoiJonostaPoisto();
+						  a.getTapahtuma();
+						//gui.logEvent("Asiakas " + a + " valitsi tapahtuman " + a.getTapahtuma());
 				break;
 			case DEP2: a = (Asiakas)palvelupisteet[1].otaJonosta();
 				   	   palvelupisteet[2].lisaaJonoon(a);
@@ -58,6 +82,7 @@ public class OmaMoottori extends Moottori{
 				a = (Asiakas)palvelupisteet[3].otaJonosta();
 				a.setPoistumisaika(Kello.getInstance().getAika());
 				a.raportti();
+				p.lisaaAsiakkaanArvio(a);
 		}
 	}
 
@@ -65,19 +90,25 @@ public class OmaMoottori extends Moottori{
 	protected void yritaCTapahtumat(){
 		for (Palvelupiste p: palvelupisteet){
 			if (!p.onVarattu() && p.onJonossa()){
+				kontrolleri.drawPalveluPiste(0, palvelupisteet[0].onVarattu());
+				kontrolleri.drawPalveluPiste(1, palvelupisteet[1].onVarattu());
+				kontrolleri.drawPalveluPiste(2, palvelupisteet[2].onVarattu());
+				kontrolleri.drawPalveluPiste(3, palvelupisteet[3].onVarattu());
 				p.aloitaPalvelu();
 			}
 		}
 	}
 
+	//TODO: Kunnon tulokset eventLogilla.
 	@Override
 	protected void tulokset() {
 		System.out.println("Simulointi päättyi kello " + Kello.getInstance().getAika());
-		System.out.println("Tulokset ... puuttuvat vielä");
+		//a.asiakkaanTulokset();
+		System.out.println(a.getArviointienKeskiarvo());
+		guiKontrolleri.logEvent("Asiakkaiden keskimääräinen ikä: " + String.valueOf(a.ianKeskiarvo()));
+		guiKontrolleri.logEvent("Asiakkaiden antamat arviot:\n" + p.palautaKeskiarvoPalveluista());
 
 		// UUTTA graafista
 		kontrolleri.naytaLoppuaika(Kello.getInstance().getAika());
 	}
-
-	
 }
