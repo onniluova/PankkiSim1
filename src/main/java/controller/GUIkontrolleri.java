@@ -1,11 +1,16 @@
 package controller;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import view.IVisualisointi;
 import view.Visualisointi2;
 import view.ISimulaattorinUI;
@@ -22,16 +27,27 @@ public class GUIkontrolleri implements ISimulaattorinUI, IKontrolleriForV {
     @FXML
     private Canvas canvas;
     @FXML
-    private TextField aika; // Add this line
+    private TextField aika;
     @FXML
-    private TextField viive; // Add this line
+    private TextField viive;
     @FXML
-    private Label tulos; // Add this line
-
+    private Label tulos;
+    @FXML
+    private Button openChartsButton;
+    private ChartWindowController chartController;
     @FXML
     private TextArea eventLog;
     private IVisualisointi visualisointi;
     private IKontrolleriForV kontrolleri;
+
+    private Parent root;
+
+    public GUIkontrolleri() throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ChartWindow.fxml"));
+        Parent root = loader.load();
+
+        chartController = loader.getController();
+    }
 
     public void updateCanvas() {
         canvas.getGraphicsContext2D().drawImage(visualisointi.getCanvas().snapshot(null, null), 0, 0);
@@ -65,6 +81,28 @@ public class GUIkontrolleri implements ISimulaattorinUI, IKontrolleriForV {
         updateCanvas();
     }
 
+    @FXML
+    private void handleOpenChartsButtonAction() throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ChartWindow.fxml"));
+        Parent root = loader.load();
+
+        chartController = loader.getController();
+
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setTitle("Charts");
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+
+    public ChartWindowController getChartController() {
+        return chartController;
+    }
+
+    public void enableOpenChartsButton() {
+        openChartsButton.setDisable(false);
+    }
+
     @Override
     public double getAika() {
         return Double.parseDouble(aika.getText());
@@ -84,6 +122,7 @@ public class GUIkontrolleri implements ISimulaattorinUI, IKontrolleriForV {
     public IVisualisointi getVisualisointi() {
         return visualisointi;
     }
+
 
     @Override
     public void kaynnistaSimulointi() {

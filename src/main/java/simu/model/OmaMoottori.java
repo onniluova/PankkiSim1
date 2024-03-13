@@ -8,6 +8,10 @@ import controller.IKontrolleriForM;
 import view.SimulaattorinGUI;
 import simu.framework.IkaGeneraattori;
 import view.ISimulaattorinUI;
+import javafx.application.Platform;
+import javafx.scene.chart.XYChart;
+import controller.ChartWindowController;
+
 
 import java.util.ArrayList;
 
@@ -26,11 +30,14 @@ public class OmaMoottori extends Moottori{
 
 	private GUIkontrolleri guiKontrolleri;
 
+	private ChartWindowController chartController;
 
-	public OmaMoottori(IKontrolleriForM kontrolleri, ISimulaattorinUI ui){
+
+	public OmaMoottori(IKontrolleriForM kontrolleri, ISimulaattorinUI ui, ChartWindowController chartController){
 
 		super(kontrolleri);
 		this.ui = ui;
+		this.chartController = chartController;
 		this.guiKontrolleri = (GUIkontrolleri) ui;
 		initialize();
 
@@ -107,6 +114,17 @@ public class OmaMoottori extends Moottori{
 		System.out.println(a.getArviointienKeskiarvo());
 		guiKontrolleri.logEvent("Asiakkaiden keskimääräinen ikä: " + String.valueOf(a.ianKeskiarvo()));
 		guiKontrolleri.logEvent("Asiakkaiden antamat arviot:\n" + p.palautaKeskiarvoPalveluista());
+		Platform.runLater(() -> guiKontrolleri.enableOpenChartsButton());
+
+		//Charts
+		ChartWindowController chartController = guiKontrolleri.getChartController();
+
+		XYChart.Series<String, Number> reviewData = new XYChart.Series<>();
+		reviewData.getData().add(new XYChart.Data<>("Average Rating", a.getArviointienKeskiarvo()));
+		chartController.updateReviewChart(reviewData);
+		XYChart.Series<String, Number> avgTimeData = new XYChart.Series<>();
+		avgTimeData.getData().add(new XYChart.Data<>("Average Time", a.keskiarvo));
+		chartController.updateAvgTimeChart(avgTimeData);
 
 		// UUTTA graafista
 		kontrolleri.naytaLoppuaika(Kello.getInstance().getAika());

@@ -7,6 +7,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.Modality;
+import javafx.scene.control.Button;
 
 public class SimulaattorinGUI extends Application {
 

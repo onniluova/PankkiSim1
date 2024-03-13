@@ -17,7 +17,7 @@ public class Kontrolleri implements IKontrolleriForM, IKontrolleriForV{   // UUS
 
 	public Kontrolleri(ISimulaattorinUI ui) {
 		this.ui = ui;
-		this.moottori = new OmaMoottori(this, ui);
+		this.moottori = new OmaMoottori(this, ui, ((GUIkontrolleri) ui).getChartController());
 	}
 	
 	// Moottorin ohjausta:
@@ -25,7 +25,7 @@ public class Kontrolleri implements IKontrolleriForM, IKontrolleriForV{   // UUS
 	@Override
 	public void kaynnistaSimulointi() {
 		Trace.setTraceLevel(Trace.Level.INFO);
-		moottori = new OmaMoottori(this, ui); // luodaan uusi moottorisäie jokaista simulointia varten
+		this.moottori = new OmaMoottori(this, ui, ((GUIkontrolleri) ui).getChartController()); // luodaan uusi moottorisäie jokaista simulointia varten
 		moottori.setSimulointiaika(ui.getAika());
 		moottori.setViive(ui.getViive());
 		ui.getVisualisointi().tyhjennaNaytto();
