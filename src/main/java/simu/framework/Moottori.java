@@ -2,6 +2,7 @@ package simu.framework;
 
 
 import controller.IKontrolleriForM; // UUSI
+import simu.model.OmaMoottori;
 
 public abstract class Moottori extends Thread implements IMoottori{  // UUDET MÄÄRITYKSET
 	

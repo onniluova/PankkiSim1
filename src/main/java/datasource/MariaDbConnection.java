@@ -10,7 +10,7 @@ public class MariaDbConnection {
     public static Connection getConnection(){
         if (conn == null){
             try {
-                conn = DriverManager.getConnection( "jdbc:mariadb://localhost:3306/simu_database");
+                conn = DriverManager.getConnection( "jdbc:mariadb://localhost:3306/simu_database?user=root&password=Nasslingmaga98");
             }catch (SQLException e){
                 System.out.println("Connection failed");
                 e.printStackTrace();
