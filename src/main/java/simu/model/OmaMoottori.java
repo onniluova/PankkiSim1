@@ -1,6 +1,8 @@
 package simu.model;
 
+import Entity.Tulos;
 import controller.GUIkontrolleri;
+import dao.DaoController;
 import simu.framework.*;
 import eduni.distributions.Negexp;
 import eduni.distributions.Normal;
@@ -102,12 +104,18 @@ public class OmaMoottori extends Moottori{
 	//TODO: Kunnon tulokset eventLogilla.
 	@Override
 	protected void tulokset() {
+		double kokonaisaika = Kello.getInstance().getAika();
+		int asiakkaidenMaara = a.getId();
+		double asiakkaidenKeskimaarainenIka = a.ianKeskiarvo();
+		Tulos tulos = new Tulos(kokonaisaika,asiakkaidenMaara,asiakkaidenKeskimaarainenIka);
+		DaoController daoController = new DaoController();
+		daoController.persist(tulos);
+
 		System.out.println("Simulointi päättyi kello " + Kello.getInstance().getAika());
 		//a.asiakkaanTulokset();
 		System.out.println(a.getArviointienKeskiarvo());
 		guiKontrolleri.logEvent("Asiakkaiden keskimääräinen ikä: " + String.valueOf(a.ianKeskiarvo()));
 		guiKontrolleri.logEvent("Asiakkaiden antamat arviot:\n" + p.palautaKeskiarvoPalveluista());
-
 		// UUTTA graafista
 		kontrolleri.naytaLoppuaika(Kello.getInstance().getAika());
 	}
