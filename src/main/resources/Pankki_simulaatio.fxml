@@ -36,6 +36,11 @@
             <Insets left="230.0" top="50.0" />
          </GridPane.margin>
       </Button>
+      <Button fx:id="chartsButton" onAction="#handleChartsButtonAction" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="20.0" prefWidth="70.0" text="Charts" textOverrun="CENTER_ELLIPSIS" GridPane.rowIndex="2">
+         <GridPane.margin>
+            <Insets left="230.0" top="100.0" />
+         </GridPane.margin>
+      </Button>
       <TextArea fx:id="eventLog" prefHeight="138.0" prefWidth="299.0" promptText="Eventlog:" GridPane.columnIndex="1" GridPane.rowIndex="2" />
       <Label fx:id="tulos" prefWidth="50.0" text="Tulos:" GridPane.rowIndex="2">
          <opaqueInsets>
