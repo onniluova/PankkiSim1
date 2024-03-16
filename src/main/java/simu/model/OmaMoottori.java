@@ -111,10 +111,12 @@ public class OmaMoottori extends Moottori{
 		DaoController daoController = new DaoController();
 		daoController.persist(tulos);
 
-		System.out.println("Simulointi päättyi kello " + Kello.getInstance().getAika());
+
 		//a.asiakkaanTulokset();
 		System.out.println(a.getArviointienKeskiarvo());
-		guiKontrolleri.logEvent("Asiakkaiden keskimääräinen ikä: " + String.valueOf(a.ianKeskiarvo()));
+		guiKontrolleri.logEvent("Simuloinnin kokonaisaika: "+ MuunnaAika.toMinutes(tulos.getKokonaisaika())+" Minuuttia " + MuunnaAika.toSeconds(tulos.getKokonaisaika())+" sekuntia "+ "("+tulos.getKokonaisaika()+" ms)");
+		guiKontrolleri.logEvent("Asiakkaiden määrä: "+ tulos.getAsiakkaiden_maara());
+		guiKontrolleri.logEvent("Asiakkaiden keskimääräinen ikä: " + tulos.getAsiakkaiden_keskimaarainen_ika());
 		guiKontrolleri.logEvent("Asiakkaiden antamat arviot:\n" + p.palautaKeskiarvoPalveluista());
 		// UUTTA graafista
 		kontrolleri.naytaLoppuaika(Kello.getInstance().getAika());
