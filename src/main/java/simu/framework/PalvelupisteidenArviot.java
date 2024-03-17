@@ -7,6 +7,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import controller.ChartsIkkunaController;
 
 public class PalvelupisteidenArviot {
 
@@ -46,7 +47,7 @@ public class PalvelupisteidenArviot {
 
 
     //TODO: Laske arviointien määrästä keskiarvo jokaiselle palvelulle
-    public void lisaaAsiakkaanArvio(Asiakas asiakas){
+    public void lisaaAsiakkaanArvio(Asiakas asiakas, ChartsIkkunaController chartController){
         int tapahtuma = asiakas.getTapahtuma();
         int arvio = asiakas.palautaArviointi();
 
@@ -54,22 +55,27 @@ public class PalvelupisteidenArviot {
             case 0:
                 palvelupisteidenArviot.put(0, palvelupisteidenArviot.get(0) + arvio);
                 tapahtumienMaarat[0] = tapahtumienMaarat[0] + numberToAdd;
+                chartController.addArvioData(tapahtumienMaarat[0], arvio);
                 break;
             case 1:
                 palvelupisteidenArviot.put(1, palvelupisteidenArviot.get(1) + arvio);
                 tapahtumienMaarat[1] = tapahtumienMaarat[1] + numberToAdd;
+                chartController.addArvioData(tapahtumienMaarat[1], arvio);
                 break;
             case 2:
                 palvelupisteidenArviot.put(2, palvelupisteidenArviot.get(2) + arvio);
                 tapahtumienMaarat[2] = tapahtumienMaarat[2] + numberToAdd;
+                chartController.addArvioData(tapahtumienMaarat[2], arvio);
                 break;
             case 3:
                 palvelupisteidenArviot.put(3, palvelupisteidenArviot.get(3) + arvio);
                 tapahtumienMaarat[3] = tapahtumienMaarat[3] + numberToAdd;
+                chartController.addArvioData(tapahtumienMaarat[3], arvio);
                 break;
             case 4:
                 palvelupisteidenArviot.put(4, palvelupisteidenArviot.get(4) + arvio);
                 tapahtumienMaarat[4] = tapahtumienMaarat[4] + numberToAdd;
+                chartController.addArvioData(tapahtumienMaarat[4], arvio);
                 break;
         }
         System.out.println(Arrays.toString(tapahtumienMaarat));

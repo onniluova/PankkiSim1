@@ -1,6 +1,7 @@
 package simu.model;
 
 import Entity.Tulos;
+import controller.ChartsIkkunaController;
 import controller.GUIkontrolleri;
 import dao.DaoController;
 import simu.framework.*;
@@ -12,6 +13,7 @@ import simu.framework.IkaGeneraattori;
 import view.ISimulaattorinUI;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class OmaMoottori extends Moottori{
 	private ISimulaattorinUI ui;
@@ -28,12 +30,17 @@ public class OmaMoottori extends Moottori{
 
 	private GUIkontrolleri guiKontrolleri;
 
+	private ArrayList<Double> pankkiaika = new ArrayList<>();
+
+	private ChartsIkkunaController chartController;
+
 
 	public OmaMoottori(IKontrolleriForM kontrolleri, ISimulaattorinUI ui){
 
 		super(kontrolleri);
 		this.ui = ui;
 		this.guiKontrolleri = (GUIkontrolleri) ui;
+		this.chartController = ((GUIkontrolleri) ui).getChartController();
 		initialize();
 
 	}
@@ -84,7 +91,8 @@ public class OmaMoottori extends Moottori{
 				a = (Asiakas)palvelupisteet[3].otaJonosta();
 				a.setPoistumisaika(Kello.getInstance().getAika());
 				a.raportti();
-				p.lisaaAsiakkaanArvio(a);
+				pankkiaika.add(a.getPoistumisaika() - a.getSaapumisaika());
+				p.lisaaAsiakkaanArvio(a, chartController);
 		}
 	}
 
@@ -111,6 +119,9 @@ public class OmaMoottori extends Moottori{
 		DaoController daoController = new DaoController();
 		daoController.persist(tulos);
 
+		ChartsIkkunaController chartController = guiKontrolleri.getChartController();
+
+		chartController.addChartData(pankkiaika);
 
 		//a.asiakkaanTulokset();
 		System.out.println(a.getArviointienKeskiarvo());
