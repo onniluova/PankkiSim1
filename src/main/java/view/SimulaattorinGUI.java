@@ -8,6 +8,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.util.Objects;
+
 public class SimulaattorinGUI extends Application {
 
     private IKontrolleriForV kontrolleri;
@@ -18,6 +20,9 @@ public class SimulaattorinGUI extends Application {
         Parent root = loader.load();
 
         kontrolleri = loader.getController();
+
+        // Add the CSS file to the root object
+        root.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
 
         primaryStage.setTitle("Simulaattori");
         primaryStage.setScene(new Scene(root));

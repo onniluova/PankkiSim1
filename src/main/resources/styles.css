@@ -1,0 +1,43 @@
+/* Set a simple and clean background color for the entire application */
+.root {
+    -fx-background-color: #f0f0f0;
+}
+
+/* Style the buttons with a simple look */
+.button {
+    -fx-background-color: #ddd;
+    -fx-text-fill: #333;
+    -fx-border-color: #bbb;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-padding: 5px 10px;
+}
+
+/* Change the button color on hover */
+.button:hover {
+    -fx-background-color: #ccc;
+}
+
+/* Style the labels with a simple look */
+.label {
+    -fx-text-fill: #333;
+    -fx-font-size: 14px;
+}
+
+/* Style the text fields with a simple look */
+.text-field {
+    -fx-background-color: #fff;
+    -fx-border-color: #bbb;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-padding: 5px;
+}
+
+/* Style the text area with a simple look */
+.text-area {
+    -fx-background-color: #fff;
+    -fx-border-color: #bbb;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-padding: 5px;
+}

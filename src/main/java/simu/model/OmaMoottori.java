@@ -34,18 +34,22 @@ public class OmaMoottori extends Moottori{
 
 	private ChartsIkkunaController chartController;
 
-
-	public OmaMoottori(IKontrolleriForM kontrolleri, ISimulaattorinUI ui){
-
-		super(kontrolleri);
-		this.ui = ui;
-		this.guiKontrolleri = (GUIkontrolleri) ui;
-		this.chartController = ((GUIkontrolleri) ui).getChartController();
-		initialize();
-
+	public Palvelupiste[] getPalvelupisteet() {
+		return palvelupisteet;
 	}
 
-	private void initialize() {
+
+	public OmaMoottori(IKontrolleriForM kontrolleri, ISimulaattorinUI ui){
+		super(kontrolleri);
+		this.ui = ui;
+		if (ui instanceof GUIkontrolleri) {
+			this.guiKontrolleri = (GUIkontrolleri) ui;
+			this.chartController = guiKontrolleri.getChartController();
+		}
+		initialize();
+	}
+
+	public void initialize() {
 		SimulaattorinGUI gui = new SimulaattorinGUI();
 		p = new PalvelupisteidenArviot();
 		palvelupisteet = new Palvelupiste[4];
@@ -64,7 +68,7 @@ public class OmaMoottori extends Moottori{
 	}
 
 	@Override
-	protected void suoritaTapahtuma(Tapahtuma t){  // B-vaiheen tapahtumat
+	public void suoritaTapahtuma(Tapahtuma t){  // B-vaiheen tapahtumat
 		switch ((TapahtumanTyyppi)t.getTyyppi()){
 			case ARR1: palvelupisteet[0].lisaaJonoon(new Asiakas());
 				       saapumisprosessi.generoiSeuraava();
@@ -129,7 +133,6 @@ public class OmaMoottori extends Moottori{
 		guiKontrolleri.logEvent("Asiakkaiden määrä: "+ tulos.getAsiakkaiden_maara());
 		guiKontrolleri.logEvent("Asiakkaiden keskimääräinen ikä: " + tulos.getAsiakkaiden_keskimaarainen_ika());
 		guiKontrolleri.logEvent("Asiakkaiden antamat arviot:\n" + p.palautaKeskiarvoPalveluista());
-		// UUTTA graafista
 		kontrolleri.naytaLoppuaika(Kello.getInstance().getAika());
 	}
 }

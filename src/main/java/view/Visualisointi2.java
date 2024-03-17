@@ -12,7 +12,7 @@ public class Visualisointi2 extends Canvas implements IVisualisointi {
 	private GraphicsContext gc;
 	private final List<Double> customerPositions;
 	private final double gap = 5; // Gap between customers
-	private final double customerSize = 20; // Size of the customer
+	private final double customerSize = 30; // Size of the customer
 
 	private double linePosition = 20; // Initial position
 
@@ -29,7 +29,7 @@ public class Visualisointi2 extends Canvas implements IVisualisointi {
 	}
 
 	public void tyhjennaNaytto() {
-		gc.setFill(Color.BLACK);
+		gc.setFill(Color.GREY);
 		gc.fillRect(0, 0, this.getWidth(), this.getHeight());
 	}
 
@@ -47,7 +47,7 @@ public class Visualisointi2 extends Canvas implements IVisualisointi {
 	public void poistaJonosta() {
 		if (!customerPositions.isEmpty()) {
 			double removedPosition = customerPositions.remove(customerPositions.size() - 1); // Remove the last position
-			gc.setFill(Color.BLACK); // Set the fill color to the background color
+			gc.setFill(Color.GREY); // Set the fill color to the background color
 			gc.fillRect(removedPosition, 80, customerSize, customerSize); // Fill the area of the removed customer with the background color
 			linePosition -= customerSize + gap; // Move linePosition backwards by the width of the customer plus the gap
 		}
