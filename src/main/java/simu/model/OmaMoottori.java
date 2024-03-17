@@ -39,15 +39,13 @@ public class OmaMoottori extends Moottori{
 	}
 
 
-	public OmaMoottori(IKontrolleriForM kontrolleri, ISimulaattorinUI ui){
+	public OmaMoottori(IKontrolleriForM kontrolleri, ISimulaattorinUI ui, ChartsIkkunaController chartController) {
 		super(kontrolleri);
 		this.ui = ui;
-		if (ui instanceof GUIkontrolleri) {
-			this.guiKontrolleri = (GUIkontrolleri) ui;
-			this.chartController = guiKontrolleri.getChartController();
-		}
+		this.chartController = chartController != null ? chartController : new ChartsIkkunaController();
 		initialize();
 	}
+
 
 	public void initialize() {
 		SimulaattorinGUI gui = new SimulaattorinGUI();

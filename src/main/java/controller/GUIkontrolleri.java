@@ -147,20 +147,26 @@ public class GUIkontrolleri implements ISimulaattorinUI, IKontrolleriForV {
             chartStage.show();
 
             } catch (Error e) {
-            // Handle the exception if FXML file can not be loaded
+
             e.printStackTrace();
             }
 
-            // Assume you have a controller class for ChartsIkkuna.fxml
             chartController = fxmlLoader.getController();
 
-            // Initialize the chart
             chartController.initializeChart();
-
-            // Pass data to the chart (replace with your actual data)
     }
 
     public ChartsIkkunaController getChartController() {
+        if (chartController == null) {
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/ChartIkkuna.fxml"));
+                fxmlLoader.load();
+                chartController = fxmlLoader.getController();
+                chartController.initializeChart();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         return chartController;
     }
 }
