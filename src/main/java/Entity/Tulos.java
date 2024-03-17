@@ -8,10 +8,12 @@ public class Tulos {
     private double kokonaisaika;
     private int asiakkaiden_maara;
     private double asiakkaiden_keskimaarainen_ika;
-    public Tulos(double kokonaisaika,int asiakkaiden_maara, double asiakkaiden_keskimaarainen_ika){
+    private double palvelupisteidenKokonaisPalveluAika;
+    public Tulos(double kokonaisaika,int asiakkaiden_maara, double asiakkaiden_keskimaarainen_ika,double palvelupisteidenKokonaisPalveluAika){
         this.kokonaisaika = kokonaisaika;
         this.asiakkaiden_maara = asiakkaiden_maara;
         this.asiakkaiden_keskimaarainen_ika = asiakkaiden_keskimaarainen_ika;
+        this.palvelupisteidenKokonaisPalveluAika = palvelupisteidenKokonaisPalveluAika;
     }
 
     public double getKokonaisaika() {
@@ -38,4 +40,13 @@ public class Tulos {
     public void setAsiakkaiden_maara(int asiakkaiden_maara) {
         this.asiakkaiden_maara = asiakkaiden_maara;
     }
+
+    public double getPalvelupisteidenKokonaisPalveluAika() {
+        return palvelupisteidenKokonaisPalveluAika;
+    }
+
+    public void setPalvelupisteidenKokonaisPalveluAika(double palvelupisteidenKokonaisPalveluAika) {
+        this.palvelupisteidenKokonaisPalveluAika = palvelupisteidenKokonaisPalveluAika;
+    }
+
 }

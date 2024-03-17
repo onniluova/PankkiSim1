@@ -138,6 +138,7 @@ public class Asiakas {
 	//	System.out.println("Asiakas "+id+ " arpoi tapahtuman: "+ tapahtumanNumero);
 	//}
 
+
 	public int getTapahtuma() {
 		return tapahtumanNumero;
 	}

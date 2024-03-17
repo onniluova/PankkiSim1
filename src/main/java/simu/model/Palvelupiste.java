@@ -16,6 +16,8 @@ public class Palvelupiste {
 	//JonoStartegia strategia; //optio: asiakkaiden järjestys
 	
 	private boolean varattu = false;
+	private double varattuStartTime = 0.0;
+	private double totalVarattuTime = 0.0;
 
 
 	public Palvelupiste(ContinuousGenerator generator, Tapahtumalista tapahtumalista, TapahtumanTyyppi tyyppi){
@@ -34,6 +36,7 @@ public class Palvelupiste {
 
 	public Asiakas otaJonosta(){  // Poistetaan palvelussa ollut
 		varattu = false;
+		totalVarattuTime += Kello.getInstance().getAika() - varattuStartTime;
 		return jono.poll();
 	}
 
@@ -43,6 +46,7 @@ public class Palvelupiste {
 		Trace.out(Trace.Level.INFO, "Aloitetaan uusi palvelu asiakkaalle " + jono.peek().getId());
 		
 		varattu = true;
+		varattuStartTime = Kello.getInstance().getAika();
 		double palveluaika = generator.sample();
 		tapahtumalista.lisaa(new Tapahtuma(skeduloitavanTapahtumanTyyppi,Kello.getInstance().getAika()+palveluaika));
 	}
@@ -57,6 +61,13 @@ public class Palvelupiste {
 
 	public boolean onJonossa(){
 		return jono.size() != 0;
+	}
+	public double getTotalVarattuTime() {
+		if (varattu) {
+			return totalVarattuTime + Kello.getInstance().getAika() - varattuStartTime;
+		} else {
+			return totalVarattuTime;
+		}
 	}
 
 }
