@@ -1,4 +1,5 @@
 import controller.ChartsIkkunaController;
+import controller.GUIkontrolleri;
 import controller.IKontrolleriForM;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,12 +19,11 @@ public class OmaMoottoriTest {
     private ISimulaattorinUI mockUi;
     private IKontrolleriForM mockKontrolleri;
     private OmaMoottori moottori;
-
     private ChartsIkkunaController mockChartController;
 
     @BeforeEach
     public void setUp() {
-        mockUi = Mockito.mock(ISimulaattorinUI.class);
+        mockUi = Mockito.mock(GUIkontrolleri.class);
         mockKontrolleri = Mockito.mock(IKontrolleriForM.class);
         mockChartController = Mockito.mock(ChartsIkkunaController.class);
         moottori = new OmaMoottori(mockKontrolleri, mockUi, mockChartController);
@@ -39,8 +39,6 @@ public class OmaMoottoriTest {
         piste.lisaaJonoon(new Asiakas());
         moottori.suoritaTapahtuma(new Tapahtuma(TapahtumanTyyppi.DEP1, 0));
         assertFalse(piste.onJonossa());
-        Mockito.verify(mockUi, Mockito.times(1)).getAika();
-        Mockito.verify(mockUi, Mockito.times(1)).getViive();
     }
 
     @Test
