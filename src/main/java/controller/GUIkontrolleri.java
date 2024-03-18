@@ -93,8 +93,6 @@ public class GUIkontrolleri implements ISimulaattorinUI, IKontrolleriForV {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        eventLog.setText("Initialization complete");
     }
     /**
      * Käsittelee "Käynnistä"-painikkeen toiminnon.
