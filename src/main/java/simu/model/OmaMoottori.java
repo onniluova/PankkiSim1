@@ -53,7 +53,7 @@ public class OmaMoottori extends Moottori{
 		p = new PalvelupisteidenArviot();
 		palvelupisteet = new Palvelupiste[4];
 
-		palvelupisteet[0]=new Palvelupiste(new Normal(10,6), tapahtumalista, TapahtumanTyyppi.DEP1);
+		palvelupisteet[0]=new Palvelupiste(new Normal(guiKontrolleri.getPalveluaika(), 6), tapahtumalista, TapahtumanTyyppi.DEP1);
 		palvelupisteet[1]=new Palvelupiste(new Normal(10,10), tapahtumalista, TapahtumanTyyppi.DEP2);
 		palvelupisteet[2]=new Palvelupiste(new Normal(5,3), tapahtumalista, TapahtumanTyyppi.DEP3);
 		palvelupisteet[3]=new Palvelupiste(new Normal(5,3), tapahtumalista, TapahtumanTyyppi.DEP4);

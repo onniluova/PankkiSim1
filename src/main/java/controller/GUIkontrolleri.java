@@ -51,6 +51,9 @@ public class GUIkontrolleri implements ISimulaattorinUI, IKontrolleriForV {
     @FXML
     private NumberAxis y;
 
+    @FXML
+    private TextField palveluaikaField;
+
     XYChart.Series series;
 
     private ChartsIkkunaController chartController;
@@ -102,6 +105,16 @@ public class GUIkontrolleri implements ISimulaattorinUI, IKontrolleriForV {
     private void handleNopeutaButtonAction() {
         kontrolleri.nopeuta();
         updateCanvas();
+    }
+
+    @Override
+    public double getPalveluaika() {
+        try {
+            return Double.parseDouble(palveluaikaField.getText());
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input in palveluaikaField. Please enter a valid number.");
+            return 0.0;
+        }
     }
 
     @Override

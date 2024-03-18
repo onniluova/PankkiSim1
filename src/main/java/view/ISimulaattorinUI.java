@@ -12,4 +12,6 @@ public interface ISimulaattorinUI {
 	// Kontrolleri tarvitsee  
 	public IVisualisointi getVisualisointi();
 
+	public double getPalveluaika();
+
 }
