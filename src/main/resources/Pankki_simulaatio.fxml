@@ -38,9 +38,14 @@
             <Insets left="230.0" top="50.0" />
          </GridPane.margin>
       </Button>
-       <TextField fx:id="palveluaikaField" prefHeight="20.0" prefWidth="100.0" minWidth="100.0" maxWidth="100.0" promptText="Palveluaika" GridPane.rowIndex="2">
+       <TextField fx:id="palveluaikaField" prefHeight="20.0" prefWidth="70.0" minWidth="70.0" maxWidth="70.0" promptText="Serving time" GridPane.rowIndex="2">
            <GridPane.margin>
-               <Insets left="90.0" top="0.0" />
+               <Insets left="70.0" top="0.0" />
+           </GridPane.margin>
+       </TextField>
+       <TextField fx:id="varianceField" prefHeight="20.0" prefWidth="70.0" minWidth="70.0" maxWidth="70.0" promptText="Variance" GridPane.rowIndex="2">
+           <GridPane.margin>
+               <Insets left="150.0" top="0.0" />
            </GridPane.margin>
        </TextField>
       <Label fx:id="tulos" GridPane.columnIndex="1" GridPane.rowIndex="2">

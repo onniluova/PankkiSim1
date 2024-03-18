@@ -54,6 +54,9 @@ public class GUIkontrolleri implements ISimulaattorinUI, IKontrolleriForV {
     @FXML
     private TextField palveluaikaField;
 
+    @FXML
+    private TextField varianceField;
+
     XYChart.Series series;
 
     private ChartsIkkunaController chartController;
@@ -130,6 +133,16 @@ public class GUIkontrolleri implements ISimulaattorinUI, IKontrolleriForV {
         } catch (NumberFormatException e) {
             System.out.println("Invalid input in palveluaikaField. Please enter a valid number.");
             return 0.0;
+        }
+    }
+
+    @Override
+    public double getVariance() {
+        try {
+            return Double.parseDouble(varianceField.getText());
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input in varianceField. Please enter a valid number.");
+            return 5;
         }
     }
     /**

@@ -14,4 +14,6 @@ public interface ISimulaattorinUI {
 
 	public double getPalveluaika();
 
+	public double getVariance();
+
 }
