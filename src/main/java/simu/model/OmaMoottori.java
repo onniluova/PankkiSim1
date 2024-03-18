@@ -63,7 +63,7 @@ public class OmaMoottori extends Moottori{
 		p = new PalvelupisteidenArviot();
 		palvelupisteet = new Palvelupiste[4];
 
-		palvelupisteet[0]=new Palvelupiste(new Normal(guiKontrolleri.getPalveluaika(), 6), tapahtumalista, TapahtumanTyyppi.DEP1);
+		palvelupisteet[0]=new Palvelupiste(new Normal(guiKontrolleri.getPalveluaika(), guiKontrolleri.getVariance()), tapahtumalista, TapahtumanTyyppi.DEP1);
 		palvelupisteet[1]=new Palvelupiste(new Normal(10,10), tapahtumalista, TapahtumanTyyppi.DEP2);
 		palvelupisteet[2]=new Palvelupiste(new Normal(5,3), tapahtumalista, TapahtumanTyyppi.DEP3);
 		palvelupisteet[3]=new Palvelupiste(new Normal(5,3), tapahtumalista, TapahtumanTyyppi.DEP4);
@@ -150,7 +150,6 @@ public class OmaMoottori extends Moottori{
 
 		chartController.addChartData(pankkiaika);
 
-		//a.asiakkaanTulokset();
 		System.out.println(a.getArviointienKeskiarvo());
 		guiKontrolleri.logEvent("Simuloinnin kokonaisaika: "+ MuunnaAika.toMinutes(tulos.getKokonaisaika())+" Minuuttia " + MuunnaAika.toSeconds(tulos.getKokonaisaika())+" sekuntia "+ "("+tulos.getKokonaisaika()+" ms)");
 		guiKontrolleri.logEvent("Asiakkaiden määrä: "+ tulos.getAsiakkaiden_maara());
@@ -158,7 +157,6 @@ public class OmaMoottori extends Moottori{
 		guiKontrolleri.logEvent("Asiakkaiden antamat arviot:\n" + p.palautaKeskiarvoPalveluista());
 		guiKontrolleri.logEvent("Palvelupisteiden kokonaisaika aktiivisena: "+ MuunnaAika.toMinutes(tulos.getPalvelupisteidenKokonaisPalveluAika())+" Minuuttia ja "+MuunnaAika.toSeconds(tulos.getPalvelupisteidenKokonaisPalveluAika())+" sekuntia");
 		guiKontrolleri.logEvent("Suoritusteho: "+ suoritusteho);
-		// UUTTA graafista
 		kontrolleri.naytaLoppuaika(Kello.getInstance().getAika());
 	}
 }
