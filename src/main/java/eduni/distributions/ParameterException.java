@@ -11,10 +11,7 @@ public class ParameterException extends Error {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	/**
-     * The constructor for errors with a message.
-     * @param name The error's message
-     */
+
     public ParameterException(String msg) { super(msg); }
 
     /** The constructor for errors without a message.
