@@ -82,6 +82,8 @@ public class GUIkontrolleri implements ISimulaattorinUI, IKontrolleriForV {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        eventLog.setText("Initialization complete");
     }
 
     @FXML
@@ -145,21 +147,15 @@ public class GUIkontrolleri implements ISimulaattorinUI, IKontrolleriForV {
             chartStage.setTitle("Charts");
             chartStage.setScene(scene);
             chartStage.show();
-
-            } catch (Error e) {
-
+        } catch (Error e) {
             e.printStackTrace();
-            }
-
-            chartController = fxmlLoader.getController();
-
-            chartController.initializeChart();
+        }
     }
 
     public ChartsIkkunaController getChartController() {
         if (chartController == null) {
             try {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/ChartIkkuna.fxml"));
+                fxmlLoader = new FXMLLoader(getClass().getResource("/ChartIkkuna.fxml"));
                 fxmlLoader.load();
                 chartController = fxmlLoader.getController();
                 chartController.initializeChart();

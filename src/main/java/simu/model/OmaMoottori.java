@@ -42,7 +42,8 @@ public class OmaMoottori extends Moottori{
 	public OmaMoottori(IKontrolleriForM kontrolleri, ISimulaattorinUI ui, ChartsIkkunaController chartController) {
 		super(kontrolleri);
 		this.ui = ui;
-		this.chartController = chartController != null ? chartController : new ChartsIkkunaController();
+		this.chartController = chartController;
+		this.guiKontrolleri = (GUIkontrolleri) ui;
 		initialize();
 	}
 
@@ -120,8 +121,6 @@ public class OmaMoottori extends Moottori{
 		Tulos tulos = new Tulos(kokonaisaika,asiakkaidenMaara,asiakkaidenKeskimaarainenIka);
 		DaoController daoController = new DaoController();
 		daoController.persist(tulos);
-
-		ChartsIkkunaController chartController = guiKontrolleri.getChartController();
 
 		chartController.addChartData(pankkiaika);
 
