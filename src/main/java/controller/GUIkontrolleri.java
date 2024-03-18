@@ -51,6 +51,9 @@ public class GUIkontrolleri implements ISimulaattorinUI, IKontrolleriForV {
     @FXML
     private NumberAxis y;
 
+    @FXML
+    private TextField palveluaikaField;
+
     XYChart.Series series;
 
     private ChartsIkkunaController chartController;
@@ -82,6 +85,8 @@ public class GUIkontrolleri implements ISimulaattorinUI, IKontrolleriForV {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        eventLog.setText("Initialization complete");
     }
 
     @FXML
@@ -100,6 +105,16 @@ public class GUIkontrolleri implements ISimulaattorinUI, IKontrolleriForV {
     private void handleNopeutaButtonAction() {
         kontrolleri.nopeuta();
         updateCanvas();
+    }
+
+    @Override
+    public double getPalveluaika() {
+        try {
+            return Double.parseDouble(palveluaikaField.getText());
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input in palveluaikaField. Please enter a valid number.");
+            return 0.0;
+        }
     }
 
     @Override
@@ -145,21 +160,15 @@ public class GUIkontrolleri implements ISimulaattorinUI, IKontrolleriForV {
             chartStage.setTitle("Charts");
             chartStage.setScene(scene);
             chartStage.show();
-
-            } catch (Error e) {
-
+        } catch (Error e) {
             e.printStackTrace();
-            }
-
-            chartController = fxmlLoader.getController();
-
-            chartController.initializeChart();
+        }
     }
 
     public ChartsIkkunaController getChartController() {
         if (chartController == null) {
             try {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/ChartIkkuna.fxml"));
+                fxmlLoader = new FXMLLoader(getClass().getResource("/ChartIkkuna.fxml"));
                 fxmlLoader.load();
                 chartController = fxmlLoader.getController();
                 chartController.initializeChart();

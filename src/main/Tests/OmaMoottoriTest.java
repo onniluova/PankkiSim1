@@ -28,6 +28,9 @@ public class OmaMoottoriTest {
         mockChartController = Mockito.mock(ChartsIkkunaController.class);
         moottori = new OmaMoottori(mockKontrolleri, mockUi, mockChartController);
         Trace.setTraceLevel(Level.INFO);
+
+        Mockito.when(mockUi.getAika()).thenReturn(1.0);
+        Mockito.when(mockUi.getViive()).thenReturn(1L);
     }
 
     @Test
@@ -36,6 +39,8 @@ public class OmaMoottoriTest {
         piste.lisaaJonoon(new Asiakas());
         moottori.suoritaTapahtuma(new Tapahtuma(TapahtumanTyyppi.DEP1, 0));
         assertFalse(piste.onJonossa());
+        Mockito.verify(mockUi, Mockito.times(1)).getAika();
+        Mockito.verify(mockUi, Mockito.times(1)).getViive();
     }
 
     @Test

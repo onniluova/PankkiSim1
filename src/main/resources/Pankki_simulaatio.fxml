@@ -38,6 +38,11 @@
             <Insets left="230.0" top="50.0" />
          </GridPane.margin>
       </Button>
+       <TextField fx:id="palveluaikaField" prefHeight="20.0" prefWidth="100.0" minWidth="100.0" maxWidth="100.0" promptText="Palveluaika" GridPane.rowIndex="2">
+           <GridPane.margin>
+               <Insets left="90.0" top="0.0" />
+           </GridPane.margin>
+       </TextField>
       <Label fx:id="tulos" GridPane.columnIndex="1" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets top="10.0" right="10.0" />
