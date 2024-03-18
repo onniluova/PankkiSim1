@@ -12,7 +12,7 @@ public class Visualisointi2 extends Canvas implements IVisualisointi {
 	private GraphicsContext gc;
 	private final List<Double> customerPositions;
 	private final double gap = 5; // Gap between customers
-	private final double customerSize = 30; // Size of the customer
+	private final double customerSize = 15; // Size of the customer
 
 	private double linePosition = 50; // Initial position
 	/**
@@ -54,9 +54,10 @@ public class Visualisointi2 extends Canvas implements IVisualisointi {
 	 */
 	public void lisaaAsiakasJonoon() {
 		gc.setFill(Color.WHITE);
-		gc.fillOval(linePosition, 125, customerSize, customerSize);
-		customerPositions.add(linePosition);
-		linePosition += customerSize + gap;
+		double yPosition = 125 + ((customerPositions.size() / 10) * (customerSize + gap));
+		double xPosition = 50 + ((customerPositions.size() % 10) * (customerSize + gap));
+		gc.fillOval(xPosition, yPosition, customerSize, customerSize);
+		customerPositions.add(xPosition);
 		gc.fillText("Jono", 65, 100);
 	}
 	/**

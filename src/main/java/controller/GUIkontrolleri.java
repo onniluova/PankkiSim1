@@ -2,6 +2,7 @@ package controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
@@ -41,7 +42,6 @@ public class GUIkontrolleri implements ISimulaattorinUI, IKontrolleriForV {
 
     @FXML
     private TextArea eventLog;
-
     @FXML
     private LineChart<?, ?> LineChart;
 
@@ -91,6 +91,7 @@ public class GUIkontrolleri implements ISimulaattorinUI, IKontrolleriForV {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/ChartIkkuna.fxml"));
             fxmlLoader.load();
+
             chartController = fxmlLoader.getController();
             chartController.initializeChart();
         } catch (IOException e) {

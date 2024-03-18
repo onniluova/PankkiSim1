@@ -1,4 +1,4 @@
-package controller; // Match the package of your FXML file
+package controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.chart.CategoryAxis;
@@ -12,7 +12,7 @@ public class ChartsIkkunaController {
     @FXML
     private LineChart<?, ?> LineChart;
     @FXML
-    private CategoryAxis x; // Make sure this matches the fx:id in the FXML
+    private CategoryAxis x;
     @FXML
     private NumberAxis y;
 
@@ -23,8 +23,8 @@ public class ChartsIkkunaController {
      */
 
     public void initializeChart() {
-        x.setLabel("X-Axis");  // Example label
-        y.setLabel("Y-Axis");  // Example label
+        x.setLabel("X-Axis");
+        y.setLabel("Y-Axis");
 
         pankkiaikaData = new XYChart.Series();
         pankkiaikaData.setName("Pankkiaika");
