@@ -18,6 +18,9 @@ public class ChartsIkkunaController {
 
     private XYChart.Series pankkiaikaData;
     private XYChart.Series arvioData;
+    /**
+     * Alustaa kaavion.
+     */
 
     public void initializeChart() {
         x.setLabel("X-Axis");  // Example label
@@ -31,18 +34,31 @@ public class ChartsIkkunaController {
         arvioData.setName("Arviot");
         LineChart.getData().add(arvioData);
     }
-
+    /**
+     * Lisää dataa kaavioon.
+     *
+     * @param poistumisajat Lista poistumisajoista.
+     */
     public void addChartData(List<Double> poistumisajat) {
         int index = 0;
         for (double aika : poistumisajat) {
             pankkiaikaData.getData().add(new XYChart.Data<>(String.valueOf(index++), aika));
         }
     }
-
+    /**
+     * Lisää arviointidataa kaavioon.
+     *
+     * @param x X-akselin arvo.
+     * @param y Y-akselin arvo.
+     */
     public void addArvioData(double x, double y) {
         arvioData.getData().add(new XYChart.Data<>(String.valueOf(x), y));
     }
-
+    /**
+     * Palauttaa viitteen LineChart-olioon.
+     *
+     * @return Viite LineChart-olioon.
+     */
     public LineChart<?, ?> getLineChart() {
         return LineChart;
     }
