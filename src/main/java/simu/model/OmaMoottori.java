@@ -14,7 +14,9 @@ import view.ISimulaattorinUI;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * OmaMoottori-luokka, joka perii Moottori-luokan.
+ */
 public class OmaMoottori extends Moottori{
 	private ISimulaattorinUI ui;
 
@@ -38,7 +40,13 @@ public class OmaMoottori extends Moottori{
 		return palvelupisteet;
 	}
 
-
+	/**
+	 * OmaMoottori-luokan konstruktori.
+	 *
+	 * @param kontrolleri kontrolleri, joka ohjaa simulaattoria
+	 * @param ui käyttöliittymä, joka visualisoi simulaation
+	 * @param chartController kontrolleri, joka hallinnoi kaavioita
+	 */
 	public OmaMoottori(IKontrolleriForM kontrolleri, ISimulaattorinUI ui, ChartsIkkunaController chartController) {
 		super(kontrolleri);
 		this.ui = ui;
@@ -47,7 +55,9 @@ public class OmaMoottori extends Moottori{
 		initialize();
 	}
 
-
+	/**
+	 * Alustaa simulaation.
+	 */
 	public void initialize() {
 		SimulaattorinGUI gui = new SimulaattorinGUI();
 		p = new PalvelupisteidenArviot();
@@ -61,11 +71,18 @@ public class OmaMoottori extends Moottori{
 		saapumisprosessi = new Saapumisprosessi(new Negexp(15,5), tapahtumalista, TapahtumanTyyppi.ARR1);
 	}
 
+	/**
+	 * Generoi ensimmäisen saapumisen
+	 */
 	@Override
 	protected void alustukset() {
-		saapumisprosessi.generoiSeuraava(); // Ensimmäinen saapuminen järjestelmään
+		saapumisprosessi.generoiSeuraava();
 	}
-
+	/**
+	 * Suorittaa B-vaiheen tapahtumat.
+	 *
+	 * @param t tapahtuma, joka suoritetaan
+	 */
 	@Override
 	public void suoritaTapahtuma(Tapahtuma t){  // B-vaiheen tapahtumat
 		switch ((TapahtumanTyyppi)t.getTyyppi()){
@@ -98,7 +115,9 @@ public class OmaMoottori extends Moottori{
 				p.lisaaAsiakkaanArvio(a, chartController);
 		}
 	}
-
+	/**
+	 * Yrittää suorittaa C-vaiheen tapahtumat.
+	 */
 	@Override
 	protected void yritaCTapahtumat(){
 		for (Palvelupiste p: palvelupisteet){
@@ -112,7 +131,9 @@ public class OmaMoottori extends Moottori{
 		}
 	}
 
-	//TODO: Kunnon tulokset eventLogilla.
+	/**
+	 * Tulostaa simulaation tulokset.
+	 */
 	@Override
 	protected void tulokset() {
 		double kokonaisaika = Kello.getInstance().getAika();

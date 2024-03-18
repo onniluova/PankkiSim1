@@ -15,28 +15,43 @@ public class Visualisointi2 extends Canvas implements IVisualisointi {
 	private final double customerSize = 30; // Size of the customer
 
 	private double linePosition = 50; // Initial position
-
+	/**
+	 * Palauttaa tämän luokan Canvas-olion.
+	 *
+	 * @return Canvas-olio
+	 */
 	@Override
 	public Canvas getCanvas() {
 		return this;
 	}
-
+	/**
+	 * Visualisointi2-luokan konstruktori.
+	 *
+	 * @param w leveys
+	 * @param h korkeus
+	 */
 	public Visualisointi2(int w, int h) {
 		super(w, h);
 		gc = this.getGraphicsContext2D();
 		customerPositions = new ArrayList<>();
 		tyhjennaNaytto();
 	}
-
+	/**
+	 * Tyhjentää näytön.
+	 */
 	public void tyhjennaNaytto() {
 		gc.setFill(Color.GREY);
 		gc.fillRect(0, 0, this.getWidth(), this.getHeight());
 	}
-
+	/**
+	 * Luo uuden asiakkaan.
+	 */
 	public void uusiAsiakas() {
 		palveluPisteet();
 	}
-
+	/**
+	 * Lisää asiakkaan jonoon.
+	 */
 	public void lisaaAsiakasJonoon() {
 		gc.setFill(Color.WHITE);
 		gc.fillOval(linePosition, 125, customerSize, customerSize);
@@ -44,7 +59,9 @@ public class Visualisointi2 extends Canvas implements IVisualisointi {
 		linePosition += customerSize + gap;
 		gc.fillText("Jono", 65, 100);
 	}
-
+	/**
+	 * Poistaa asiakkaan jonosta.
+	 */
 	public void poistaJonosta() {
 		if (!customerPositions.isEmpty()) {
 			double removedPosition = customerPositions.remove(customerPositions.size() - 1);
@@ -53,12 +70,19 @@ public class Visualisointi2 extends Canvas implements IVisualisointi {
 			linePosition -= customerSize + gap;
 		}
 	}
-
+	/**
+	 * Piirtää varatun tilan.
+	 *
+	 * @param index indeksi
+	 * @param occupied onko varattu
+	 */
 	public void piirraVarattu(int index, boolean occupied) {
 		gc.setFill(occupied ? Color.RED : Color.BLUE);
 		gc.fillOval(280, 50 + 50 * index, 30, 30);
 	}
-
+	/**
+	 * Piirtää palvelupisteet.
+	 */
 	public void palveluPisteet() {
 		gc.setFill(Color.BLUE);
 		gc.fillText("Palvelupisteet", 255, 40);
