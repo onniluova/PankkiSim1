@@ -1,14 +1,21 @@
-Simulaation käynnistäminen: Aseta aika ja viive sen jälkeen käynnistä simulointi napsauttamalla sovelluksen "Start"-painiketta. Tämä aloittaa simuloinnin asettamiesi parametrien perusteella.
+Simulaation käynnistäminen:
 
-![Main_naytto](https://github.com/onniluova/PankkiSim1/assets/142782632/7fcf3a1e-253b-4e0e-bd59-e7ba6e928437)
+Syötä simulaation aika, viive ja palveluaika
+-	Aika määrittää kuinka kauan kestää simulaation alusta loppuun.
+-	Viive määrittää aikaviivettä tapahtuman tai toiminnon alkamisen ja sen päättymisen välillä.
+-	Palveluaika määrittää keskimääräisen ajan kuinka kauan palvelu kestää.
+sen jälkeen käynnistä simulointi napsauttamalla sovelluksen "Start"-painiketta. Tämä aloittaa simuloinnin asettamiesi parametrien perusteella.
+
+![paanaytto1](https://github.com/onniluova/PankkiSim1/assets/142782632/54276e76-f684-4f28-abae-2ca6bc2adb95)
 
 Nopeuta simulointia: Jos haluat nopeuttaa simulointia, napsauta "Accelerate"-painiketta. Tämä nopeuttaa simulointia.
 
 Hidasta simulointia: Jos simulointi on liian nopeaa, voit hidastaa sitä napsauttamalla "delay"-painiketta. Tämä hidastaa simulointia.
 
+
 Simulointiajan tarkastelu: Käynnissä oleva simulointiaika näkyy sovellusikkunassa. Aikaa päivitetään reaaliajassa simuloinnin edetessä.
 
-![Simulaatio_kaynnissa](https://github.com/onniluova/PankkiSim1/assets/142782632/4db73743-dd9e-4db3-b33b-da57e1eb4a6e)
+![mainsimulaatio1](https://github.com/onniluova/PankkiSim1/assets/142782632/20b21e1d-2dfd-4594-a91c-14d7f98e0ec5)
 
 Tapahtumalogin tarkastelu: Tapahtumaloki näyttää listan simuloinnin aikana tapahtuvista tapahtumista. Jokainen tapahtuma on aikaleimattu, joten näet, milloin se tapahtui suhteessa simuloinnin alkuun.
 
