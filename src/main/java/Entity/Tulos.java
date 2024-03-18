@@ -14,6 +14,7 @@ public class Tulos {
     private double asiakkaiden_keskimaarainen_ika;
     private double palvelupisteidenKokonaisPalveluAika;
     private double suoritusteho;
+    private double palveluajanKeskiarvo;
 
     /**
      * Tulos-luokan konstruktori.
@@ -24,7 +25,7 @@ public class Tulos {
      * @param palvelupisteidenKokonaisPalveluAika Palvelupisteiden kokonaispalveluaika.
      * @param suoritusteho Suoritusteho.
      */
-    public Tulos(double kokonaisaika,int asiakkaiden_maara, double asiakkaiden_keskimaarainen_ika,double palvelupisteidenKokonaisPalveluAika, double suoritusteho,int saapuneetAsiakkaat, int palvellutAsiakkaat){
+    public Tulos(double kokonaisaika,int asiakkaiden_maara, double asiakkaiden_keskimaarainen_ika,double palvelupisteidenKokonaisPalveluAika, double suoritusteho,int saapuneetAsiakkaat, int palvellutAsiakkaat,double palveluajanKeskiarvo){
         this.kokonaisaika = kokonaisaika;
         this.asiakkaiden_maara = asiakkaiden_maara;
         this.asiakkaiden_keskimaarainen_ika = asiakkaiden_keskimaarainen_ika;
@@ -32,6 +33,7 @@ public class Tulos {
         this.suoritusteho = suoritusteho;
         this.saapuneetAsiakkaat = saapuneetAsiakkaat;
         this.palvellutAsiakkaat = palvellutAsiakkaat;
+        this.palveluajanKeskiarvo = palveluajanKeskiarvo;
     }
 
     /**
@@ -138,5 +140,13 @@ public class Tulos {
 
     public void setSaapuneetAsiakkaat(int saapuneetAsiakkaat) {
         this.saapuneetAsiakkaat = saapuneetAsiakkaat;
+    }
+
+    public double getPalveluajanKeskiarvo() {
+        return palveluajanKeskiarvo;
+    }
+
+    public void setPalveluajanKeskiarvo(double palveluajanKeskiarvo) {
+        this.palveluajanKeskiarvo = palveluajanKeskiarvo;
     }
 }

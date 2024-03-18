@@ -29,7 +29,8 @@ public class DaoController {
                 double suoritusteho = rs.getDouble(5);
                 int saapuneetAsiakkaat = rs.getInt(6);
                 int palvellutAsiakkaat = rs.getInt(7);
-                Tulos tulos = new Tulos(kokonaisaika, asiakkaidenMaara, keskimaarainen_ika,palveluPisteidenKokonaisPalveluAika,suoritusteho,saapuneetAsiakkaat,palvellutAsiakkaat);
+                double palveluajanKeskiarvo = rs.getDouble(8);
+                Tulos tulos = new Tulos(kokonaisaika, asiakkaidenMaara, keskimaarainen_ika,palveluPisteidenKokonaisPalveluAika,suoritusteho,saapuneetAsiakkaat,palvellutAsiakkaat, palveluajanKeskiarvo);
                 tulokset.add(tulos);
             }
         } catch (SQLException e) {
@@ -46,7 +47,7 @@ public class DaoController {
      */
     public Tulos getTulosById(int id) {
         Connection conn = MariaDbConnection.getConnection();
-        String sql = "SELECT kokonaisaika, asiakkaiden_maara, asiakkaiden_keskimaarainen_ika, palvelupisteiden_palveluaika, suoritusteho, saapuneet_asiakkaat, palvellut_asiakkaat FROM tulokset WHERE id=?";
+        String sql = "SELECT kokonaisaika, asiakkaiden_maara, asiakkaiden_keskimaarainen_ika, palvelupisteiden_palveluaika, suoritusteho, saapuneet_asiakkaat, palvellut_asiakkaat, palveluajan_keskiarvo FROM tulokset WHERE id=?";
 
         double kokonaisaika = 0;
         int asiakkaiden_maara = 0;
@@ -55,6 +56,7 @@ public class DaoController {
         double suoritusteho = 0;
         int saapuneetAsiakkaat = 0;
         int palvellutAsiakkaat = 0;
+        double palveluajan_keskiarvo = 0;
         int count = 0;
 
         try {
@@ -71,13 +73,14 @@ public class DaoController {
                 palveluPisteidenKokonaisPalveluAika = rs.getDouble(4);
                 saapuneetAsiakkaat = rs.getInt(6);
                 palvellutAsiakkaat = rs.getInt(7);
+                palveluajan_keskiarvo = rs.getDouble(8);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
         if (count==1) {
-            return new Tulos(kokonaisaika, asiakkaiden_maara, asiakkaiden_keskimaarainen_ika,palveluPisteidenKokonaisPalveluAika, suoritusteho, saapuneetAsiakkaat, palvellutAsiakkaat);
+            return new Tulos(kokonaisaika, asiakkaiden_maara, asiakkaiden_keskimaarainen_ika,palveluPisteidenKokonaisPalveluAika, suoritusteho, saapuneetAsiakkaat, palvellutAsiakkaat, palveluajan_keskiarvo);
         }
         else {
             return null;
@@ -90,7 +93,7 @@ public class DaoController {
      */
     public void persist(Tulos tulos) {
         Connection conn = MariaDbConnection.getConnection();
-        String sql = "INSERT INTO tulokset (kokonaisaika,asiakkaiden_maara, asiakkaiden_keskimaarainen_ika, palvelupisteiden_palveluaika, suoritusteho, saapuneet_asiakkaat, palvellut_asiakkaat) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO tulokset (kokonaisaika,asiakkaiden_maara, asiakkaiden_keskimaarainen_ika, palvelupisteiden_palveluaika, suoritusteho, saapuneet_asiakkaat, palvellut_asiakkaat, palveluajan_keskiarvo) VALUES (?, ?, ?, ?, ?, ?, ?,? )";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setDouble(1, tulos.getKokonaisaika());
@@ -100,6 +103,7 @@ public class DaoController {
             ps.setDouble(5,tulos.getSuoritusteho());
             ps.setInt(6, tulos.getSaapuneetAsiakkaat());
             ps.setInt(7, tulos.getPalvellutAsiakkaat());
+            ps.setDouble(8, tulos.getPalveluajanKeskiarvo());
 
             ps.executeUpdate();
         } catch (SQLException e) {

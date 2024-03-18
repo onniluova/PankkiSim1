@@ -15,4 +15,5 @@ alter table tulokset add palvelupisteen_palveluaika decimal(10,2);
 alter table tulokset add suoritusteho decimal(10.2);
 ALTER TABLE tulokset ADD saapuneet_asiakkaat INT(6);
 ALTER TABLE tulokset ADD palvellut_asiakkaat INT(6);
+ALTER TABLE tulokset ADD palveluajan_keskiarvo decimal(10.2);
 

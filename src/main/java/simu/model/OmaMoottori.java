@@ -159,7 +159,8 @@ public class OmaMoottori extends Moottori{
 		for (Palvelupiste p : palvelupisteet) {
 			totalVarattuTime += p.getTotalVarattuTime();
 		}
-		Tulos tulos = new Tulos(kokonaisaika,asiakkaidenMaara,asiakkaidenKeskimaarainenIka,totalVarattuTime,suoritusteho, saapuneetAsiakkaat, palvellutAsiakkaat);
+		double palveluajanKeskiarvo = totalVarattuTime / leftCustomers;
+		Tulos tulos = new Tulos(kokonaisaika,asiakkaidenMaara,asiakkaidenKeskimaarainenIka,totalVarattuTime,suoritusteho, saapuneetAsiakkaat, palvellutAsiakkaat, palveluajanKeskiarvo);
 		DaoController daoController = new DaoController();
 		daoController.persist(tulos);
 
@@ -174,6 +175,8 @@ public class OmaMoottori extends Moottori{
 		guiKontrolleri.logEvent("Suoritusteho: "+ suoritusteho);
 		guiKontrolleri.logEvent("Saapuneet asiakkaat: "+ saapuneetAsiakkaat);
 		guiKontrolleri.logEvent("Palvelluksi tulleet asiakkaat: "+ palvellutAsiakkaat);
+
+		guiKontrolleri.logEvent("Palveluajan keskiarvo: "+ palveluajanKeskiarvo+ " ms");
 		kontrolleri.naytaLoppuaika(Kello.getInstance().getAika());
 	}
 }
