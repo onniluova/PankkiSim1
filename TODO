@@ -1,9 +1,13 @@
 Suorituskykysuureet powerpoint nro.3 materiaaleissa
 
-1. // --> tehty // Palvelupisteen palveluaika eli busy time
+1. // --> tehty // Palvelupisteen palveluaika eli busy time // Pitääkö olla arr, depp1,depp2 yms??
+
 2. palvelupisteen käyttöaste
-3. suoritustehto (palveltujen asiakkaitten lukumäärä aikayksikössä)
+
+3. --> tehty // suoritustehto (palveltujen asiakkaitten lukumäärä aikayksikössä)
+
 4. Palvelupisteen keskimääräinen palveluaika
+
 5. asiakkaan läpimenoaika palvelupisteessä (vaste aika) (Aika palvelupisteen jonoon saapumisesta palvelun päättymiseen).
 
 Test units...
