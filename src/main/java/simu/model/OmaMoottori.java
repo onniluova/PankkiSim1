@@ -35,6 +35,8 @@ public class OmaMoottori extends Moottori{
 	private ArrayList<Double> pankkiaika = new ArrayList<>();
 
 	private ChartsIkkunaController chartController;
+	private int arrivedCustomers = 0;
+	private int leftCustomers = 0;
 
 	public Palvelupiste[] getPalvelupisteet() {
 		return palvelupisteet;
@@ -86,13 +88,15 @@ public class OmaMoottori extends Moottori{
 	@Override
 	public void suoritaTapahtuma(Tapahtuma t){  // B-vaiheen tapahtumat
 		switch ((TapahtumanTyyppi)t.getTyyppi()){
-			case ARR1: palvelupisteet[0].lisaaJonoon(new Asiakas());
-				       saapumisprosessi.generoiSeuraava();
-					   kontrolleri.visualisoiAsiakas();
-						kontrolleri.visualisoiJono();
-					if (gui != null) {
-						//gui.logEvent("Uusi asiakas " + a + " on pankissa");
-					}
+			case ARR1:
+				palvelupisteet[0].lisaaJonoon(new Asiakas());
+				arrivedCustomers++;
+				saapumisprosessi.generoiSeuraava();
+				kontrolleri.visualisoiAsiakas();
+				kontrolleri.visualisoiJono();
+				if (gui != null) {
+					//gui.logEvent("Uusi asiakas " + a + " on pankissa");
+				}
 				break;
 			case DEP1: a = (Asiakas)palvelupisteet[0].otaJonosta();
 				   	   palvelupisteet[1].lisaaJonoon(a);
@@ -109,6 +113,7 @@ public class OmaMoottori extends Moottori{
 
 			case DEP4:
 				a = (Asiakas)palvelupisteet[3].otaJonosta();
+				leftCustomers++;
 				a.setPoistumisaika(Kello.getInstance().getAika());
 				a.raportti();
 				pankkiaika.add(a.getPoistumisaika() - a.getSaapumisaika());
@@ -130,6 +135,14 @@ public class OmaMoottori extends Moottori{
 			}
 		}
 	}
+	public int getArrivedCustomers() {
+		return arrivedCustomers;
+	}
+
+	public int getLeftCustomers() {
+		return leftCustomers;
+	}
+
 
 	/**
 	 * Tulostaa simulaation tulokset.
@@ -137,14 +150,16 @@ public class OmaMoottori extends Moottori{
 	@Override
 	protected void tulokset() {
 		double kokonaisaika = Kello.getInstance().getAika();
-		int asiakkaidenMaara = a.getId();
+		int asiakkaidenMaara = arrivedCustomers;
 		double asiakkaidenKeskimaarainenIka = a.ianKeskiarvo();
 		double totalVarattuTime = 0.0;
 		double suoritusteho = asiakkaidenMaara/kokonaisaika;
+		int saapuneetAsiakkaat = arrivedCustomers;
+		int palvellutAsiakkaat = leftCustomers;
 		for (Palvelupiste p : palvelupisteet) {
 			totalVarattuTime += p.getTotalVarattuTime();
 		}
-		Tulos tulos = new Tulos(kokonaisaika,asiakkaidenMaara,asiakkaidenKeskimaarainenIka,totalVarattuTime,suoritusteho);
+		Tulos tulos = new Tulos(kokonaisaika,asiakkaidenMaara,asiakkaidenKeskimaarainenIka,totalVarattuTime,suoritusteho, saapuneetAsiakkaat, palvellutAsiakkaat);
 		DaoController daoController = new DaoController();
 		daoController.persist(tulos);
 
@@ -157,6 +172,8 @@ public class OmaMoottori extends Moottori{
 		guiKontrolleri.logEvent("Asiakkaiden antamat arviot:\n" + p.palautaKeskiarvoPalveluista());
 		guiKontrolleri.logEvent("Palvelupisteiden kokonaisaika aktiivisena: "+ MuunnaAika.toMinutes(tulos.getPalvelupisteidenKokonaisPalveluAika())+" Minuuttia ja "+MuunnaAika.toSeconds(tulos.getPalvelupisteidenKokonaisPalveluAika())+" sekuntia");
 		guiKontrolleri.logEvent("Suoritusteho: "+ suoritusteho);
+		guiKontrolleri.logEvent("Saapuneet asiakkaat: "+ saapuneetAsiakkaat);
+		guiKontrolleri.logEvent("Palvelluksi tulleet asiakkaat: "+ palvellutAsiakkaat);
 		kontrolleri.naytaLoppuaika(Kello.getInstance().getAika());
 	}
 }

@@ -7,6 +7,8 @@ import simu.model.*;
  * Luokka, joka hallinnoi tulosten toimintoja.
  */
 public class Tulos {
+    private int saapuneetAsiakkaat;
+    private int palvellutAsiakkaat;
     private double kokonaisaika;
     private int asiakkaiden_maara;
     private double asiakkaiden_keskimaarainen_ika;
@@ -22,12 +24,14 @@ public class Tulos {
      * @param palvelupisteidenKokonaisPalveluAika Palvelupisteiden kokonaispalveluaika.
      * @param suoritusteho Suoritusteho.
      */
-    public Tulos(double kokonaisaika,int asiakkaiden_maara, double asiakkaiden_keskimaarainen_ika,double palvelupisteidenKokonaisPalveluAika, double suoritusteho){
+    public Tulos(double kokonaisaika,int asiakkaiden_maara, double asiakkaiden_keskimaarainen_ika,double palvelupisteidenKokonaisPalveluAika, double suoritusteho,int saapuneetAsiakkaat, int palvellutAsiakkaat){
         this.kokonaisaika = kokonaisaika;
         this.asiakkaiden_maara = asiakkaiden_maara;
         this.asiakkaiden_keskimaarainen_ika = asiakkaiden_keskimaarainen_ika;
         this.palvelupisteidenKokonaisPalveluAika = palvelupisteidenKokonaisPalveluAika;
         this.suoritusteho = suoritusteho;
+        this.saapuneetAsiakkaat = saapuneetAsiakkaat;
+        this.palvellutAsiakkaat = palvellutAsiakkaat;
     }
 
     /**
@@ -118,5 +122,21 @@ public class Tulos {
      */
     public void setSuoritusteho(double suoritusteho) {
         this.suoritusteho = suoritusteho;
+    }
+
+    public int getPalvellutAsiakkaat() {
+        return palvellutAsiakkaat;
+    }
+
+    public void setPalvellutAsiakkaat(int palvellutAsiakkaat) {
+        this.palvellutAsiakkaat = palvellutAsiakkaat;
+    }
+
+    public int getSaapuneetAsiakkaat() {
+        return saapuneetAsiakkaat;
+    }
+
+    public void setSaapuneetAsiakkaat(int saapuneetAsiakkaat) {
+        this.saapuneetAsiakkaat = saapuneetAsiakkaat;
     }
 }

@@ -19,6 +19,7 @@ public class Palvelupiste {
 	private boolean varattu = false;
 	private double varattuStartTime = 0.0;
 	private double totalVarattuTime = 0.0;
+	private double kayttoaste = 0.0;
 
 	/**
 	 * Palvelupiste-luokan konstruktori.
@@ -91,5 +92,6 @@ public class Palvelupiste {
 			return totalVarattuTime;
 		}
 	}
+
 
 }
