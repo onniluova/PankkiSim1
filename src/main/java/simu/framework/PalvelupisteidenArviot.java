@@ -9,6 +9,9 @@ import java.util.Arrays;
 import java.util.HashMap;
 import controller.ChartsIkkunaController;
 
+/**
+ * PalvelupisteidenArviot-luokka, joka laskee palvelupisteiden arviot.
+ */
 public class PalvelupisteidenArviot {
 
     HashMap<Integer, Integer> palvelupisteidenArviot = new HashMap<>();
@@ -19,6 +22,9 @@ public class PalvelupisteidenArviot {
 
     DecimalFormat decimalFormat = new DecimalFormat("#.##");
 
+    /**
+     * PalvelupisteidenArviot-luokan konstruktori.
+     */
     public PalvelupisteidenArviot() {
         tapahtumat.add(0);
         tapahtumat.add(1);
@@ -31,10 +37,20 @@ public class PalvelupisteidenArviot {
         }
     }
 
+    /**
+     * Palauttaa palvelupisteiden arviot merkkijonona.
+     *
+     * @return palvelupisteiden arviot merkkijonona
+     */
     public String palautaArviotStringina() {
         return palvelupisteidenArviot.toString();
     }
 
+    /**
+     * Palauttaa keskiarvon palveluista.
+     *
+     * @return keskiarvo palveluista merkkijonona
+     */
     public String palautaKeskiarvoPalveluista() {
         double[] keskiarvot = new double[5];
         for (int i = 0; i < 5; i++) {
@@ -45,8 +61,12 @@ public class PalvelupisteidenArviot {
         return "Laina: " + decimalFormat.format(keskiarvot[0]) + "\nTalletus: " + decimalFormat.format(keskiarvot[1]) + "\nKortin uusiminen: " + decimalFormat.format(keskiarvot[2]) + "\nTilin avaaminen: " + decimalFormat.format(keskiarvot[3]) + "\nTilin sulkeminen: " + decimalFormat.format(keskiarvot[4]);
     }
 
-
-    //TODO: Laske arviointien määrästä keskiarvo jokaiselle palvelulle
+    /**
+     * Lisää asiakkaan arvion.
+     *
+     * @param asiakas asiakas, jonka arvio lisätään
+     * @param chartController ohjain, joka päivittää kaavion
+     */
     public void lisaaAsiakkaanArvio(Asiakas asiakas, ChartsIkkunaController chartController){
         int tapahtuma = asiakas.getTapahtuma();
         int arvio = asiakas.palautaArviointi();

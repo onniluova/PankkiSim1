@@ -7,14 +7,21 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Tapahtuma implements Comparable<Tapahtuma> {
-	
-		
+
+	/**
+	 * Tapahtuma-luokka, joka kuvaa yksittäistä tapahtumaa.
+	 */
 	private TapahtumanTyyppi tyyppi;
 	private double aika;
 	ArrayList <Integer> tapahtumat = new ArrayList<>();
 
 	HashMap<Integer, Integer> palvelupisteidenArviot = new HashMap<>();
-	
+	/**
+	 * Tapahtuma-luokan konstruktori.
+	 *
+	 * @param tyyppi tapahtuman tyyppi
+	 * @param aika tapahtuman aika
+	 */
 	public Tapahtuma(TapahtumanTyyppi tyyppi, double aika){
 		this.tyyppi = tyyppi;
 		this.aika = aika;
@@ -48,7 +55,11 @@ public class Tapahtuma implements Comparable<Tapahtuma> {
 	public double getAika() {
 		return aika;
 	}
-
+	/**
+	 * Lisää asiakkaan arvion.
+	 *
+	 * @param asiakas asiakas, jonka arvio lisätään
+	 */
 	public void lisaaAsiakkaanArvio(Asiakas asiakas){
 		int tapahtuma = asiakas.getTapahtuma();
 		int arvio = asiakas.palautaArviointi();
@@ -71,6 +82,14 @@ public class Tapahtuma implements Comparable<Tapahtuma> {
 				break;
 		}
 	}
+	/**
+	 * Vertaa tätä tapahtumaa toiseen tapahtumaan ajan perusteella.
+	 *
+	 * @param arg toinen tapahtuma, johon tätä tapahtumaa verrataan
+	 * @return negatiivinen luku, jos tämän tapahtuman aika on pienempi kuin toisen tapahtuman aika,
+	 *         positiivinen luku, jos tämän tapahtuman aika on suurempi kuin toisen tapahtuman aika,
+	 *         tai 0, jos tapahtumien ajat ovat yhtä suuret
+	 */
 	@Override
 	public int compareTo(Tapahtuma arg) {
 		if (this.aika < arg.aika) return -1;

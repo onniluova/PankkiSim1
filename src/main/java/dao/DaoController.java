@@ -4,8 +4,15 @@ import java.sql.*;
 import datasource.MariaDbConnection;
 import java.util.*;
 import Entity.Tulos;
-
+/**
+ * Luokka, joka hallinnoi tietokannan toimintoja.
+ */
 public class DaoController {
+    /**
+     * Hakee kaikki tulokset tietokannasta.
+     *
+     * @return Lista tuloksista.
+     */
     public List<Tulos> getAllTulokset() {
         Connection conn = MariaDbConnection.getConnection();
         String sql = "SELECT * FROM tulokset";
@@ -29,6 +36,12 @@ public class DaoController {
         return tulokset;
 
     }
+    /**
+     * Hakee tuloksen tietokannasta annetun id:n perusteella.
+     *
+     * @param id Tuloksen id.
+     * @return Tulos tai null, jos tulosta ei löydy.
+     */
     public Tulos getTulosById(int id) {
         Connection conn = MariaDbConnection.getConnection();
         String sql = "SELECT kokonaisaika, asiakkaiden_maara, asiakkaiden_keskimaarainen_ika, palvelupisteiden_palveluaika, suoritusteho FROM tulokset WHERE id=?";
@@ -64,6 +77,11 @@ public class DaoController {
             return null;
         }
     }
+    /**
+     * Tallentaa tuloksen tietokantaan.
+     *
+     * @param tulos Tallennettava tulos.
+     */
     public void persist(Tulos tulos) {
         Connection conn = MariaDbConnection.getConnection();
         String sql = "INSERT INTO tulokset (kokonaisaika,asiakkaiden_maara, asiakkaiden_keskimaarainen_ika, palvelupisteiden_palveluaika, suoritusteho) VALUES (?, ?, ?, ?, ?)";

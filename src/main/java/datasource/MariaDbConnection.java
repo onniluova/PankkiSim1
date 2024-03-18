@@ -1,12 +1,20 @@
 package datasource;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-
+/**
+ * Luokka, joka hallinnoi MariaDB-tietokantayhteyden luomista ja lopettamista.
+ */
 public class MariaDbConnection {
     private static Connection conn = null;
 
+    /**
+     * Luo yhteyden MariaDB-tietokantaan, jos yhteyttä ei ole jo olemassa.
+     *
+     * @return Yhteys MariaDB-tietokantaan.
+     */
     public static Connection getConnection(){
         if (conn == null){
             try {
@@ -21,11 +29,14 @@ public class MariaDbConnection {
             return conn;
         }
     }
+
+    /**
+     * Lopettaa yhteyden MariaDB-tietokantaan.
+     */
     public static void terminate() {
         try {
             getConnection().close();
         } catch (SQLException e) {
-
             e.printStackTrace();
         }
     }
