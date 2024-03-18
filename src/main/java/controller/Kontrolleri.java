@@ -9,19 +9,27 @@ import view.SimulaattorinGUI;
 import view.Visualisointi;
 import view.Visualisointi2;
 import simu.framework.Trace.Level;
-
+/**
+ * Luokka, joka hallinnoi simulaattorin toimintoja.
+ */
 public class Kontrolleri implements IKontrolleriForM, IKontrolleriForV{   // UUSI
-	
+
 	private IMoottori moottori;
 	private ISimulaattorinUI ui;
-
+	/**
+	 * Kontrolleri-luokan konstruktori.
+	 *
+	 * @param ui Käyttöliittymä.
+	 */
 	public Kontrolleri(ISimulaattorinUI ui) {
 		this.ui = ui;
 		moottori = new OmaMoottori(this, ui, ((GUIkontrolleri)ui).getChartController());
 	}
-	
-	// Moottorin ohjausta:
-		
+
+
+	/**
+	 * Käynnistää simulaation.
+	 */
 	@Override
 	public void kaynnistaSimulointi() {
 		Trace.setTraceLevel(Trace.Level.INFO);
@@ -30,27 +38,36 @@ public class Kontrolleri implements IKontrolleriForM, IKontrolleriForV{   // UUS
 		moottori.setViive(ui.getViive());
 		ui.getVisualisointi().tyhjennaNaytto();
 		((Thread)moottori).start();
-		//((Thread)moottori).run(); // Ei missään tapauksessa näin. Miksi?		
+		//((Thread)moottori).run(); // Ei missään tapauksessa näin. Miksi?
 	}
-	
+	/**
+	 * Hidastaa simulaatiota.
+	 */
 	@Override
 	public void hidasta() { // hidastetaan moottorisäiettä
 		moottori.setViive((long)(moottori.getViive()*1.10));
 	}
-
+	/**
+	 * Nopeuttaa simulaatiota.
+	 */
 	@Override
 	public void nopeuta() { // nopeutetaan moottorisäiettä
 		moottori.setViive((long)(moottori.getViive()*0.9));
 	}
-	
-	// Simulointitulosten välittämistä käyttöliittymään.
-	// Koska FX-ui:n päivitykset tulevat moottorisäikeestä, ne pitää ohjata JavaFX-säikeeseen:
-		
+
+	/**
+	 * Näyttää simulaation loppuajan.
+	 *
+	 * @param aika Loppuaika.
+	 */
+
 	@Override
 	public void naytaLoppuaika(double aika) {
-		Platform.runLater(()->ui.setLoppuaika(aika)); 
+		Platform.runLater(()->ui.setLoppuaika(aika));
 	}
-
+	/**
+	 * Visualisoi jonon.
+	 */
 	public void visualisoiJono() {
 		Platform.runLater(new Runnable(){
 			public void run(){
@@ -59,7 +76,9 @@ public class Kontrolleri implements IKontrolleriForM, IKontrolleriForV{   // UUS
 			}
 		});
 	}
-
+	/**
+	 * Visualisoi jonosta poiston.
+	 */
 	public void visualisoiJonostaPoisto() {
 		Platform.runLater(new Runnable(){
 			public void run(){
@@ -69,7 +88,12 @@ public class Kontrolleri implements IKontrolleriForM, IKontrolleriForV{   // UUS
 
 		});
 	}
-
+	/**
+	 * Piirtää palvelupisteen.
+	 *
+	 * @param index Palvelupisteen indeksi.
+	 * @param isReserved Onko palvelupiste varattu.
+	 */
 	public void drawPalveluPiste(int index, boolean isReserved) {
 		Platform.runLater(new Runnable(){
 			public void run(){
@@ -78,7 +102,9 @@ public class Kontrolleri implements IKontrolleriForM, IKontrolleriForV{   // UUS
 			}
 		});
 	}
-	
+	/**
+	 * Visualisoi asiakkaan.
+	 */
 	@Override
 	public void visualisoiAsiakas() {
 		Platform.runLater(new Runnable(){

@@ -62,15 +62,23 @@ public class GUIkontrolleri implements ISimulaattorinUI, IKontrolleriForV {
     private IKontrolleriForV kontrolleri;
 
     FXMLLoader fxmlLoader;
-
+    /**
+     * Päivittää kankaan.
+     */
     public void updateCanvas() {
         canvas.getGraphicsContext2D().drawImage(visualisointi.getCanvas().snapshot(null, null), 0, 0);
     }
-
+    /**
+     * Kirjaa tapahtuman.
+     *
+     * @param eventText Tapahtuman teksti.
+     */
     public void logEvent(String eventText) {
         eventLog.appendText(eventText + "\n");
     }
-
+    /**
+     * Alustaa komponentit.
+     */
     public void initialize() {
         kontrolleri = new Kontrolleri(this);
         visualisointi = new Visualisointi2((int)canvas.getWidth(), (int)canvas.getHeight());
@@ -88,25 +96,35 @@ public class GUIkontrolleri implements ISimulaattorinUI, IKontrolleriForV {
 
         eventLog.setText("Initialization complete");
     }
-
+    /**
+     * Käsittelee "Käynnistä"-painikkeen toiminnon.
+     */
     @FXML
     private void handleKaynnistaButtonAction() {
         kontrolleri.kaynnistaSimulointi();
         updateCanvas();
     }
-
+    /**
+     * Käsittelee "Hidasta"-painikkeen toiminnon.
+     */
     @FXML
     private void handleHidastaButtonAction() {
         kontrolleri.hidasta();
         updateCanvas();
     }
-
+    /**
+     * Käsittelee "Nopeuta"-painikkeen toiminnon.
+     */
     @FXML
     private void handleNopeutaButtonAction() {
         kontrolleri.nopeuta();
         updateCanvas();
     }
-
+    /**
+     * Palauttaa palveluajan.
+     *
+     * @return Palveluaika.
+     */
     @Override
     public double getPalveluaika() {
         try {
@@ -116,42 +134,69 @@ public class GUIkontrolleri implements ISimulaattorinUI, IKontrolleriForV {
             return 0.0;
         }
     }
-
+    /**
+     * Palauttaa ajan.
+     *
+     * @return Aika.
+     */
     @Override
     public double getAika() {
         return Double.parseDouble(aika.getText());
     }
+    /**
+     * Palauttaa viiveen.
+     *
+     * @return Viive.
+     */
     @Override
     public long getViive() {
         return Long.parseLong(viive.getText());
     }
-
+    /**
+     * Asettaa loppuajan.
+     *
+     * @param aika Loppuaika.
+     */
     @Override
     public void setLoppuaika(double aika) {
         DecimalFormat formatter = new DecimalFormat("#0.00");
         this.tulos.setText(formatter.format(aika));
     }
-
+    /**
+     * Palauttaa visualisoinnin.
+     *
+     * @return Visualisointi.
+     */
     @Override
     public IVisualisointi getVisualisointi() {
         return visualisointi;
     }
-
+    /**
+     * Käynnistää simuloinnin.
+     */
     @Override
     public void kaynnistaSimulointi() {
         kontrolleri.kaynnistaSimulointi();
     }
-
+    /**
+     * Nopeuttaa simulointia.
+     */
     @Override
     public void nopeuta() {
         kontrolleri.nopeuta();
     }
-
+    /**
+     * Hidastaa simulointia.
+     */
     @Override
     public void hidasta() {
         kontrolleri.hidasta();
     }
-
+    /**
+     * Käsittelee "Kaaviot"-painikkeen toiminnon.
+     *
+     * @param actionEvent Tapahtuma.
+     */
     @FXML
     private void handleChartsButtonAction(ActionEvent actionEvent) {
         try {
@@ -164,7 +209,11 @@ public class GUIkontrolleri implements ISimulaattorinUI, IKontrolleriForV {
             e.printStackTrace();
         }
     }
-
+    /**
+     * Palauttaa kaavioikkunan ohjaimen.
+     *
+     * @return Kaavioikkunan ohjain.
+     */
     public ChartsIkkunaController getChartController() {
         if (chartController == null) {
             try {
