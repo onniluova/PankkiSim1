@@ -13,6 +13,10 @@ public class Saapumisprosessi {
 		this.tyyppi = tyyppi;
 	}
 
+	/**
+	 * Generoi seuraavan asiakkaan
+	 */
+
 	public void generoiSeuraava(){
 		Tapahtuma t = new Tapahtuma(tyyppi, Kello.getInstance().getAika()+generaattori.sample());
 		tapahtumalista.lisaa(t);

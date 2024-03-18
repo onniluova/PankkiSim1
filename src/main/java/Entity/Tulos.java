@@ -10,6 +10,7 @@ public class Tulos {
     private double asiakkaiden_keskimaarainen_ika;
     private double palvelupisteidenKokonaisPalveluAika;
     private double suoritusteho;
+
     public Tulos(double kokonaisaika,int asiakkaiden_maara, double asiakkaiden_keskimaarainen_ika,double palvelupisteidenKokonaisPalveluAika, double suoritusteho){
         this.kokonaisaika = kokonaisaika;
         this.asiakkaiden_maara = asiakkaiden_maara;

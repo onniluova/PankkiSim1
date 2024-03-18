@@ -13,18 +13,21 @@ public abstract class Moottori extends Thread implements IMoottori{  // UUDET M√
 	
 	protected Tapahtumalista tapahtumalista;
 
-	protected IKontrolleriForM kontrolleri; // UUSI
-	
-
-	public Moottori(IKontrolleriForM kontrolleri){  // UUSITTU
+	protected IKontrolleriForM kontrolleri;
+	/**
+	 * Moottori-luokan konstruktori.
+	 *
+	 * @param kontrolleri Kontrolleri.
+	 */
+	public Moottori(IKontrolleriForM kontrolleri){
 		
-		this.kontrolleri = kontrolleri;  //UUSI
+		this.kontrolleri = kontrolleri;
 
-		kello = Kello.getInstance(); // Otetaan kello muuttujaan yksinkertaistamaan koodia
+		kello = Kello.getInstance();
 		
 		tapahtumalista = new Tapahtumalista();
 		
-		// Palvelupisteet luodaan simu.model-pakkauksessa Moottorin aliluokassa 
+
 		
 		
 	}
@@ -43,7 +46,10 @@ public abstract class Moottori extends Thread implements IMoottori{  // UUDET M√
 	public long getViive() {
 		return viive;
 	}
-	
+
+	/**
+	 * Suorittaa simuloinnin.
+	 */
 	@Override
 	public void run(){ // Entinen aja()
 		alustukset(); // luodaan mm. ensimm√§inen tapahtuma

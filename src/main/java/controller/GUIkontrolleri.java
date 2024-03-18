@@ -68,6 +68,9 @@ public class GUIkontrolleri implements ISimulaattorinUI, IKontrolleriForV {
         eventLog.appendText(eventText + "\n");
     }
 
+    /**
+     * Alustaa kontrollerin ja visualisoinnin.
+     */
     public void initialize() {
         kontrolleri = new Kontrolleri(this);
         visualisointi = new Visualisointi2((int)canvas.getWidth(), (int)canvas.getHeight());
@@ -83,6 +86,9 @@ public class GUIkontrolleri implements ISimulaattorinUI, IKontrolleriForV {
             e.printStackTrace();
         }
     }
+    /**
+     * Käsittelee kaynnistaButtonin toiminnon. Käynnistää simuloinnin
+     */
 
     @FXML
     private void handleKaynnistaButtonAction() {
@@ -101,7 +107,11 @@ public class GUIkontrolleri implements ISimulaattorinUI, IKontrolleriForV {
         kontrolleri.nopeuta();
         updateCanvas();
     }
-
+    /**
+     * Palauttaa ajan.
+     *
+     * @return Aika.
+     */
     @Override
     public double getAika() {
         return Double.parseDouble(aika.getText());
@@ -111,6 +121,11 @@ public class GUIkontrolleri implements ISimulaattorinUI, IKontrolleriForV {
         return Long.parseLong(viive.getText());
     }
 
+    /**
+     * Asettaa loppuajan.
+     *
+     * @param aika Loppuaika.
+     */
     @Override
     public void setLoppuaika(double aika) {
         DecimalFormat formatter = new DecimalFormat("#0.00");
@@ -122,6 +137,9 @@ public class GUIkontrolleri implements ISimulaattorinUI, IKontrolleriForV {
         return visualisointi;
     }
 
+    /**
+     * Käynnistää simuloinnin.
+     */
     @Override
     public void kaynnistaSimulointi() {
         kontrolleri.kaynnistaSimulointi();

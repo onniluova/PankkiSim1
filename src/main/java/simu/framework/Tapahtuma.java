@@ -48,6 +48,11 @@ public class Tapahtuma implements Comparable<Tapahtuma> {
 	public double getAika() {
 		return aika;
 	}
+	/**
+	 * Lisää asiakkaan arvion.
+	 *
+	 * @param asiakas Asiakas, jonka arvio lisätään.
+	 */
 
 	public void lisaaAsiakkaanArvio(Asiakas asiakas){
 		int tapahtuma = asiakas.getTapahtuma();
@@ -71,6 +76,12 @@ public class Tapahtuma implements Comparable<Tapahtuma> {
 				break;
 		}
 	}
+	/**
+	 * Vertaa tätä tapahtumaa toiseen tapahtumaan.
+	 *
+	 * @param arg Toinen tapahtuma.
+	 * @return -1, jos tämä tapahtuma on ennen toista tapahtumaa. 1, jos tämä tapahtuma on jälkeen toisen tapahtuman. 0, jos tapahtumat ovat samanaikaisia.
+	 */
 	@Override
 	public int compareTo(Tapahtuma arg) {
 		if (this.aika < arg.aika) return -1;

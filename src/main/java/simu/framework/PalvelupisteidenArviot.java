@@ -9,6 +9,9 @@ import java.util.Arrays;
 import java.util.HashMap;
 import controller.ChartsIkkunaController;
 
+/**
+ * Luokka, joka hallinnoi palvelupisteiden arvioita.
+ */
 public class PalvelupisteidenArviot {
 
     HashMap<Integer, Integer> palvelupisteidenArviot = new HashMap<>();
@@ -35,6 +38,12 @@ public class PalvelupisteidenArviot {
         return palvelupisteidenArviot.toString();
     }
 
+
+    /**
+     * Palauttaa keskiarvon palveluista.
+     *
+     * @return Keskiarvo palveluista.
+     */
     public String palautaKeskiarvoPalveluista() {
         double[] keskiarvot = new double[5];
         for (int i = 0; i < 5; i++) {
@@ -46,7 +55,12 @@ public class PalvelupisteidenArviot {
     }
 
 
-    //TODO: Laske arviointien määrästä keskiarvo jokaiselle palvelulle
+    /**
+     * Lisää asiakkaan arvion.
+     *
+     * @param asiakas Asiakas, jonka arvio lisätään.
+     * @param chartController Kaavion ohjain.
+     */
     public void lisaaAsiakkaanArvio(Asiakas asiakas, ChartsIkkunaController chartController){
         int tapahtuma = asiakas.getTapahtuma();
         int arvio = asiakas.palautaArviointi();

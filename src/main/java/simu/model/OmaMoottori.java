@@ -58,10 +58,18 @@ public class OmaMoottori extends Moottori{
 		saapumisprosessi = new Saapumisprosessi(new Negexp(15,5), tapahtumalista, TapahtumanTyyppi.ARR1);
 	}
 
+	/**
+	 * ensimmäinen saapuminen alustetaan
+	 */
 	@Override
 	protected void alustukset() {
-		saapumisprosessi.generoiSeuraava(); // Ensimmäinen saapuminen järjestelmään
+		saapumisprosessi.generoiSeuraava();
 	}
+
+	/**
+	 * suorittaa B - tapahtuman
+	 * @param t tapahtuma olio parametrina.
+	 */
 
 	@Override
 	protected void suoritaTapahtuma(Tapahtuma t){  // B-vaiheen tapahtumat
@@ -95,6 +103,10 @@ public class OmaMoottori extends Moottori{
 				p.lisaaAsiakkaanArvio(a, chartController);
 		}
 	}
+
+	/**
+	 * suorittaa C- tapahtuman
+	 */
 
 	@Override
 	protected void yritaCTapahtumat(){

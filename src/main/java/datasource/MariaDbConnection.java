@@ -7,6 +7,11 @@ import java.sql.SQLException;
 public class MariaDbConnection {
     private static Connection conn = null;
 
+    /**
+     * Yhdistää databaseen
+     * @return conn, jos yhteys ei onnistu conn= null
+     */
+
     public static Connection getConnection(){
         if (conn == null){
             try {
