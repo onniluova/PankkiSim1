@@ -66,9 +66,9 @@ public class OmaMoottori extends Moottori{
 		palvelupisteet = new Palvelupiste[4];
 
 		palvelupisteet[0]=new Palvelupiste(new Normal(guiKontrolleri.getPalveluaika(), guiKontrolleri.getVariance()), tapahtumalista, TapahtumanTyyppi.DEP1);
-		palvelupisteet[1]=new Palvelupiste(new Normal(10,10), tapahtumalista, TapahtumanTyyppi.DEP2);
-		palvelupisteet[2]=new Palvelupiste(new Normal(5,3), tapahtumalista, TapahtumanTyyppi.DEP3);
-		palvelupisteet[3]=new Palvelupiste(new Normal(5,3), tapahtumalista, TapahtumanTyyppi.DEP4);
+		palvelupisteet[1]=new Palvelupiste(new Normal(guiKontrolleri.getPalveluaika(), 10), tapahtumalista, TapahtumanTyyppi.DEP2);
+		palvelupisteet[2]=new Palvelupiste(new Normal(guiKontrolleri.getPalveluaika(),3), tapahtumalista, TapahtumanTyyppi.DEP3);
+		palvelupisteet[3]=new Palvelupiste(new Normal(guiKontrolleri.getPalveluaika(),3), tapahtumalista, TapahtumanTyyppi.DEP4);
 
 		saapumisprosessi = new Saapumisprosessi(new Negexp(15,5), tapahtumalista, TapahtumanTyyppi.ARR1);
 	}
@@ -176,7 +176,7 @@ public class OmaMoottori extends Moottori{
 		guiKontrolleri.logEvent("Saapuneet asiakkaat: "+ saapuneetAsiakkaat);
 		guiKontrolleri.logEvent("Palvelluksi tulleet asiakkaat: "+ palvellutAsiakkaat);
 
-		guiKontrolleri.logEvent("Palveluajan keskiarvo: "+ palveluajanKeskiarvo+ " ms");
+		guiKontrolleri.logEvent("Palveluajan keskiarvo: "+ palveluajanKeskiarvo+ " ms ("+ MuunnaAika.toMinutes(palveluajanKeskiarvo)+"minuuttia ja "+MuunnaAika.toSeconds(palveluajanKeskiarvo)+" sekuntia");
 		kontrolleri.naytaLoppuaika(Kello.getInstance().getAika());
 	}
 }
